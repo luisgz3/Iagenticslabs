@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IAgentics Labs — Escribime por WhatsApp</title>
-<meta name="description" content="Liberate del 80% de las tareas operativas de tu negocio digital para enfocarte en lo más importante.">
+<meta name="description" content="Instalá un Sistema Agéntico en tu negocio: liberá el 80% del trabajo humano y centralizá toda tu información en un solo lugar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -45,6 +45,36 @@
     opacity: 0.05;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.5) 0px, transparent 1px, transparent 3px);
+  }
+
+  .hud-bar{
+    margin-top: 22px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--ink-dim);
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .hud-dot{
+    width:7px; height:7px; border-radius:50%; background:#27c93f; flex-shrink:0;
+    animation: hud-pulse 2s infinite;
+  }
+  @keyframes hud-pulse{
+    0%{ box-shadow:0 0 0 0 rgba(39,201,63,0.6); }
+    70%{ box-shadow:0 0 0 6px rgba(39,201,63,0); }
+    100%{ box-shadow:0 0 0 0 rgba(39,201,63,0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hud-dot{ animation:none; }
   }
 
   a{ color:inherit; text-decoration:none; }
@@ -162,7 +192,7 @@
     text-align:center;
     max-width: 560px; margin: 0 auto;
   }
-  .accent{ color: var(--redline); }
+  .accent{ color: var(--redline); text-shadow: 0 0 14px rgba(255,90,31,0.35); }
   .pains-lead{ margin-top: 14px; color: var(--ink-dim); font-size: 15.5px; text-align:center; max-width: 480px; margin-left:auto; margin-right:auto; }
 
   .pain-list{ margin-top: 36px; border: 1px solid var(--line); }
@@ -374,13 +404,50 @@
     .term-line{ animation: none; opacity:1; }
     .cursor{ animation: none; }
   }
+
+  /* ---------- pipeline (proceso) ---------- */
+  .pipeline{ margin-top:36px; text-align:left; }
+  .pipe-step{ display:flex; gap:20px; position:relative; padding-bottom:34px; }
+  .pipe-step:last-child{ padding-bottom:0; }
+  .pipe-step::before{
+    content:""; position:absolute; left:19px; top:42px; bottom:0; width:1px;
+    background: var(--line);
+  }
+  .pipe-step:last-child::before{ display:none; }
+  .pipe-num{
+    flex-shrink:0; width:40px; height:40px; border:1px solid var(--line); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:13px; color: var(--ink-dim);
+    background: var(--bg); position:relative; z-index:1;
+    transition: border-color .15s ease, color .15s ease, box-shadow .15s ease;
+  }
+  .pipe-step:hover .pipe-num{ border-color: var(--redline); color: var(--redline); box-shadow: 0 0 14px rgba(255,90,31,0.4); }
+  .pipe-title{ font-family:var(--mono); font-size:14.5px; color: var(--amber); padding-top:8px; }
+  .pipe-desc{ margin-top:6px; font-size:14.5px; color: var(--ink-dim); line-height:1.65; }
+
+  /* ---------- faq ---------- */
+  .faq-list{ border:1px solid var(--line); text-align:left; }
+  .faq-item{ border-bottom:1px dashed var(--line); }
+  .faq-item:last-child{ border-bottom:none; }
+  .faq-item summary{
+    list-style:none; cursor:pointer; padding:18px 24px;
+    font-family:var(--display); font-weight:600; font-size:15.5px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+    transition: color .15s ease;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary:hover{ color: var(--redline); }
+  .faq-caret{ font-family:var(--mono); color:var(--redline); display:inline-block; transition: transform .2s ease; }
+  .faq-item[open] .faq-caret{ transform: rotate(90deg); }
+  .faq-item p{ padding: 0 24px 20px 48px; color:var(--ink-dim); font-size:14.5px; line-height:1.7; }
 </style>
 </head>
 <body>
 
 <section class="hero">
   <div class="wrap">
-    <h1>Reducimos hasta un 80% la complejidad operativa de tu negocio con sistemas agénticos.</h1>
+    <h1>Instalá un Sistema Agéntico en tu negocio.</h1>
+    <p class="hero-sub">Liberá el 80% del trabajo humano y centralizá toda la información de tu negocio en un solo sistema.</p>
 
     <div class="terminal" style="margin-top:34px;">
       <div class="term-bar">
@@ -395,6 +462,10 @@
         <div class="term-line" style="--i:5"><span class="ok">[ok]</span> automatizaciones activas: <span class="accent-mono">12</span></div>
         <div class="term-line" style="--i:6"><span class="prompt">&gt;</span> listo para escalar tu negocio<span class="cursor">_</span></div>
       </div>
+    </div>
+
+    <div class="hud-bar">
+      <span class="hud-dot"></span> SISTEMA: ONLINE &nbsp;·&nbsp; AGENTES: 24/7 &nbsp;·&nbsp; LATENCIA: <span class="accent-mono">&lt;2s</span>
     </div>
 
     <div class="cta-row" style="margin-top:30px;">
@@ -570,6 +641,41 @@
   </div>
 </section>
 
+<div class="wrap"><div class="cutline"><span class="tag2">05 — el proceso</span></div></div>
+
+<section class="pains" style="position:relative; overflow:hidden;">
+  <span class="section-marker">05</span>
+  <span class="section-glow tr"></span>
+  <div class="wrap">
+    <h2>Así se instala un <span class="accent">Sistema Agéntico</span></h2>
+    <p class="pains-lead">Tres pasos, sin humo.</p>
+
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-num">01</div>
+        <div>
+          <div class="pipe-title">auditoria.sh</div>
+          <p class="pipe-desc">Relevamos tu negocio: mensajes, herramientas, tareas repetitivas y cuellos de botella reales.</p>
+        </div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">02</div>
+        <div>
+          <div class="pipe-title">evaluacion_procesos.sh</div>
+          <p class="pipe-desc">Evaluamos qué procesos conviene automatizar primero y el impacto real en horas y en plata.</p>
+        </div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">03</div>
+        <div>
+          <div class="pipe-title">propuesta.sh</div>
+          <p class="pipe-desc">Te mostramos el Sistema Agéntico a medida: qué hace, cómo se conecta y qué vas a dejar de hacer vos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="get" style="background: var(--bg-panel);">
   <div class="wrap">
     <h2>¿Qué podrías dejar de hacer manualmente?</h2>
@@ -595,6 +701,36 @@
     <p class="punch-sub">Necesitás un sistema que las haga trabajar juntas.</p>
     <p class="hero-sub" style="margin-top: 22px; margin-left:auto; margin-right:auto;">Analizamos tus procesos actuales, identificamos qué puede automatizarse y construimos la infraestructura necesaria para que la IA pueda ejecutar esas tareas por vos.</p>
     <p class="punch-line" style="color: var(--ink-dim);">Menos trabajo manual. Menos cuellos de botella. Más capacidad para crecer.</p>
+  </div>
+</section>
+
+<div class="wrap"><div class="cutline"><span class="tag2">06 — antes de escribirnos</span></div></div>
+
+<section class="pains" style="position:relative; overflow:hidden;">
+  <span class="section-marker">06</span>
+  <span class="section-glow bl"></span>
+  <div class="wrap">
+    <h2>Preguntas <span class="accent">frecuentes</span></h2>
+    <p class="pains-lead">Para que no pierdas tiempo vos ni nosotros.</p>
+
+    <div class="faq-list" style="margin-top:32px;">
+      <details class="faq-item">
+        <summary><span class="faq-caret">›</span> ¿Qué es un Sistema Agéntico?</summary>
+        <p>Es una infraestructura de agentes de IA conectada a tus herramientas (WhatsApp, CRM, calendario, etc.) que ejecuta procesos completos de tu negocio sin que una persona tenga que operar cada paso manualmente.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-caret">›</span> ¿Con qué tipo de negocios trabajan?</summary>
+        <p>Con negocios que ya tienen volumen real: consultas todos los días, movimiento constante de clientes, y un equipo que ya siente que las tareas repetitivas le comen el tiempo. Cuanto más compleja tu operación, más impacto tiene instalar un sistema.</p>
+      </details>
+      <details class="faq-item" open>
+        <summary><span class="faq-caret">›</span> ¿Con quién <span class="accent">no</span> trabajamos?</summary>
+        <p>No trabajamos con negocios que recién están arrancando, que todavía no tienen un flujo constante de clientes o consultas, o que buscan "una automatización barata" sin un proceso serio detrás. Si tu operación todavía es chica, probablemente no seamos la mejor opción por ahora — preferimos decírtelo antes que hacerte perder tiempo y plata a los dos.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-caret">›</span> ¿Cuánto tarda la implementación?</summary>
+        <p>Depende de lo que salga en la auditoría, pero el proceso completo (auditoría → evaluación de procesos → propuesta → instalación) suele resolverse en semanas, no en meses.</p>
+      </details>
+    </div>
   </div>
 </section>
 
