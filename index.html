@@ -440,6 +440,24 @@
   .faq-caret{ font-family:var(--mono); color:var(--redline); display:inline-block; transition: transform .2s ease; }
   .faq-item[open] .faq-caret{ transform: rotate(90deg); }
   .faq-item p{ padding: 0 24px 20px 48px; color:var(--ink-dim); font-size:14.5px; line-height:1.7; }
+
+  /* ---------- brain diagram ---------- */
+  .diagram-figure{ margin-top:40px; }
+  .diagram-figure > svg{ width:100%; height:auto; max-width:560px; display:block; margin:0 auto; }
+  .diagram-caption{ margin-top:18px; text-align:center; font-size:13.5px; color:var(--ink-dim); max-width:440px; margin-left:auto; margin-right:auto; line-height:1.6; }
+  .diag-line{ stroke: var(--line); stroke-width:1.5; fill:none; }
+  .diag-arrowhead{ fill: var(--redline); }
+  .diag-dot-in{ fill: var(--redline); }
+  .diag-dot-out{ fill: var(--amber); }
+  .diag-pulse{ stroke: var(--redline); stroke-width:1.5; fill:none; }
+  .diag-hub{ fill: var(--bg-panel); stroke: var(--redline); stroke-width:2; }
+  .diag-hub-icon{ stroke: var(--ink); fill:none; stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round; }
+  .diag-hub-label{ fill: var(--ink-dim); font-family: var(--mono); font-size:11.5px; text-anchor:middle; }
+  .diag-node{ fill: var(--bg); stroke: var(--line); }
+  .diag-node-icon{ stroke: var(--ink-dim); fill:none; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+  .diag-node-label{ fill: var(--ink-dim); font-family: var(--mono); font-size:12px; text-anchor:middle; }
+  .diag-check-circle{ fill: var(--bg-panel); stroke: var(--redline); stroke-width:1.2; }
+  .diag-check-mark{ stroke: var(--redline); stroke-width:1.6; fill:none; stroke-linecap:round; stroke-linejoin:round; }
 </style>
 </head>
 <body>
@@ -579,7 +597,120 @@
   <span class="section-glow tl"></span>
   <div class="wrap">
     <h2>Diseñamos <span class="accent">Sistemas Agénticos</span> capaces de ejecutar procesos completos de tu negocio</h2>
-    <p class="pains-lead">Usando IA, automatizaciones e integraciones. No se trata simplemente de poner un chatbot en tu web — se trata de analizar cómo funciona tu negocio, detectar dónde estás perdiendo tiempo y construir sistemas que puedan encargarse de esas operaciones. Por ejemplo:</p>
+    <p class="pains-lead">Usando IA, automatizaciones e integraciones. No se trata simplemente de poner un chatbot en tu web — se trata de analizar cómo funciona tu negocio, detectar dónde estás perdiendo tiempo y construir sistemas que puedan encargarse de esas operaciones.</p>
+
+    <figure class="diagram-figure">
+      <svg viewBox="0 0 600 430" role="img" aria-label="Diagrama: un núcleo de IA en el centro recibe datos de WhatsApp, CRM, Calendario, Pagos y Pedidos en tiempo real, y devuelve acciones ejecutadas a cada sistema.">
+        <defs>
+          <marker id="diag-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 10 5 0 10Z" class="diag-arrowhead"/>
+          </marker>
+        </defs>
+
+        <circle cx="300" cy="230" r="70" class="diag-pulse" opacity="0.3">
+          <animate attributeName="r" values="66;86;66" dur="3.4s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.35;0;0.35" dur="3.4s" repeatCount="indefinite"/>
+        </circle>
+
+        <line x1="300" y1="89" x2="300" y2="166" class="diag-line" marker-end="url(#diag-arrow)"/>
+        <line x1="434" y1="187" x2="361" y2="210" class="diag-line" marker-end="url(#diag-arrow)"/>
+        <line x1="383" y1="344" x2="338" y2="282" class="diag-line" marker-end="url(#diag-arrow)"/>
+        <line x1="217" y1="344" x2="262" y2="282" class="diag-line" marker-end="url(#diag-arrow)"/>
+        <line x1="166" y1="187" x2="239" y2="210" class="diag-line" marker-end="url(#diag-arrow)"/>
+
+        <circle r="3.4" class="diag-dot-in"><animateMotion dur="2.6s" begin="0s" repeatCount="indefinite" path="M300,89 L300,166"/></circle>
+        <circle r="3.4" class="diag-dot-in"><animateMotion dur="2.6s" begin="0.5s" repeatCount="indefinite" path="M434,187 L361,210"/></circle>
+        <circle r="3.4" class="diag-dot-in"><animateMotion dur="2.6s" begin="1s" repeatCount="indefinite" path="M383,344 L338,282"/></circle>
+        <circle r="3.4" class="diag-dot-in"><animateMotion dur="2.6s" begin="1.5s" repeatCount="indefinite" path="M217,344 L262,282"/></circle>
+        <circle r="3.4" class="diag-dot-in"><animateMotion dur="2.6s" begin="2s" repeatCount="indefinite" path="M166,187 L239,210"/></circle>
+
+        <circle r="3.4" class="diag-dot-out"><animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" path="M300,166 L300,89"/></circle>
+        <circle r="3.4" class="diag-dot-out"><animateMotion dur="2.6s" begin="1.8s" repeatCount="indefinite" path="M361,210 L434,187"/></circle>
+        <circle r="3.4" class="diag-dot-out"><animateMotion dur="2.6s" begin="2.3s" repeatCount="indefinite" path="M338,282 L383,344"/></circle>
+        <circle r="3.4" class="diag-dot-out"><animateMotion dur="2.6s" begin="2.8s" repeatCount="indefinite" path="M262,282 L217,344"/></circle>
+        <circle r="3.4" class="diag-dot-out"><animateMotion dur="2.6s" begin="3.3s" repeatCount="indefinite" path="M239,210 L166,187"/></circle>
+
+        <circle cx="300" cy="230" r="58" class="diag-hub"/>
+        <svg x="282" y="192" width="36" height="36" viewBox="0 0 24 24" class="diag-hub-icon">
+          <path d="M8 4c-2 0-3.5 1.6-3.5 3.5 0 .7.2 1.3.5 1.9C3.6 10 3 11.2 3 12.5 3 14.4 4.3 16 6 16.4V18c0 1.1.9 2 2 2h1v-3.2M16 4c2 0 3.5 1.6 3.5 3.5 0 .7-.2 1.3-.5 1.9.9.6 1.5 1.8 1.5 3.1 0 1.9-1.3 3.5-3 3.9V18c0 1.1-.9 2-2 2h-1v-3.2M9 6.5v10M15 6.5v10M9 9.5h2.5M12.5 9.5H15M9 13h2.5M12.5 13H15"/>
+        </svg>
+        <text x="300" y="248" class="diag-hub-label">SISTEMA</text>
+        <text x="300" y="261" class="diag-hub-label">AGÉNTICO</text>
+
+        <g>
+          <rect x="240" y="27" width="120" height="56" rx="8" class="diag-node"/>
+          <svg x="289" y="31" width="22" height="22" viewBox="0 0 24 24" class="diag-node-icon">
+            <rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/>
+          </svg>
+          <text x="300" y="71" class="diag-node-label">Calendario</text>
+          <circle cx="348" cy="35" r="8" class="diag-check-circle" opacity="0">
+            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.55;0.85;1" dur="4.2s" begin="1.5s" repeatCount="indefinite"/>
+          </circle>
+          <path d="M344.5 35 347 37.5 351.5 32.5" class="diag-check-mark" opacity="0">
+            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.55;0.85;1" dur="4.2s" begin="1.5s" repeatCount="indefinite"/>
+          </path>
+        </g>
+
+        <g>
+          <rect x="406" y="148" width="120" height="56" rx="8" class="diag-node"/>
+          <svg x="455" y="152" width="22" height="22" viewBox="0 0 24 24" class="diag-node-icon">
+            <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>
+          </svg>
+          <text x="466" y="192" class="diag-node-label">Pagos</text>
+          <circle cx="514" cy="156" r="8" class="diag-check-circle" opacity="0">
+            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.55;0.85;1" dur="4.2s" begin="2s" repeatCount="indefinite"/>
+          </circle>
+          <path d="M510.5 156 513 158.5 517.5 153.5" class="diag-check-mark" opacity="0">
+            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.55;0.85;1" dur="4.2s" begin="2s" repeatCount="indefinite"/>
+          </path>
+        </g>
+
+        <g>
+          <rect x="343" y="344" width="120" height="56" rx="8" class="diag-node"/>
+          <svg x="392" y="348" width="22" height="22" viewBox="0 0 24 24" class="diag-node-icon">
+            <path d="M3 7 12 3l9 4-9 4-9-4Z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/>
+          </svg>
+          <text x="403" y="388" class="diag-node-label">Pedidos</text>
+          <circle cx="451" cy="352" r="8" class="diag-check-circle" opacity="0">
+            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.55;0.85;1" dur="4.2s" begin="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <path d="M447.5 352 450 354.5 454.5 349.5" class="diag-check-mark" opacity="0">
+            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.55;0.85;1" dur="4.2s" begin="2.5s" repeatCount="indefinite"/>
+          </path>
+        </g>
+
+        <g>
+          <rect x="137" y="344" width="120" height="56" rx="8" class="diag-node"/>
+          <svg x="186" y="348" width="22" height="22" viewBox="0 0 24 24" class="diag-node-icon">
+            <circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.5c2.6.3 4.5 2.3 4.5 5.5"/>
+          </svg>
+          <text x="197" y="388" class="diag-node-label">CRM</text>
+          <circle cx="245" cy="352" r="8" class="diag-check-circle" opacity="0">
+            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.55;0.85;1" dur="4.2s" begin="3s" repeatCount="indefinite"/>
+          </circle>
+          <path d="M241.5 352 244 354.5 248.5 349.5" class="diag-check-mark" opacity="0">
+            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.55;0.85;1" dur="4.2s" begin="3s" repeatCount="indefinite"/>
+          </path>
+        </g>
+
+        <g>
+          <rect x="74" y="148" width="120" height="56" rx="8" class="diag-node"/>
+          <svg x="123" y="152" width="22" height="22" viewBox="0 0 24 24" class="diag-node-icon" stroke="none" fill="var(--ink-dim)">
+            <path d="M17.6 6.3A8.9 8.9 0 0 0 3.1 16.9L2 21l4.2-1.1a8.9 8.9 0 0 0 12.8-8A8.9 8.9 0 0 0 17.6 6.3ZM12 19.5a7.5 7.5 0 0 1-3.8-1l-.3-.2-2.5.7.7-2.4-.2-.3a7.5 7.5 0 1 1 6.1 3.2Zm4.1-5.6c-.2-.1-1.3-.7-1.5-.7-.2-.1-.4-.1-.5.1s-.6.7-.7.9-.3.2-.5.1a6.1 6.1 0 0 1-1.8-1.1 6.8 6.8 0 0 1-1.3-1.6c-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4a.5.5 0 0 0 0-.5c-.1-.1-.5-1.3-.7-1.7s-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.7 2.7 0 0 0-.8 2 4.7 4.7 0 0 0 1 2.5 10.8 10.8 0 0 0 4.1 3.6c.6.2 1 .4 1.4.5a3.3 3.3 0 0 0 1.5.1 2.5 2.5 0 0 0 1.6-1.1 1.8 1.8 0 0 0 .1-1.1c-.1-.1-.2-.2-.4-.3Z"/>
+          </svg>
+          <text x="134" y="192" class="diag-node-label">WhatsApp</text>
+          <circle cx="182" cy="156" r="8" class="diag-check-circle" opacity="0">
+            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.55;0.85;1" dur="4.2s" begin="3.5s" repeatCount="indefinite"/>
+          </circle>
+          <path d="M178.5 156 181 158.5 185.5 153.5" class="diag-check-mark" opacity="0">
+            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.55;0.85;1" dur="4.2s" begin="3.5s" repeatCount="indefinite"/>
+          </path>
+        </g>
+      </svg>
+      <figcaption class="diagram-caption">El núcleo de IA recibe datos de cada sistema en tiempo real (puntos rojos) y devuelve acciones ya ejecutadas (puntos ámbar) — sin que nadie tenga que mover la información a mano.</figcaption>
+    </figure>
+
+    <p class="pains-lead" style="margin-top:36px;">Por ejemplo:</p>
 
     <div class="pain-list" style="margin-top:32px;">
       <div class="pain-item"><span class="pain-mark">→</span><span class="pain-text">Entra un cliente: el agente responde, califica y recopila información.</span></div>
