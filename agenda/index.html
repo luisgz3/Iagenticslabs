@@ -116,8 +116,8 @@ h2{ font-size:clamp(26px,4.2vw,42px); }
 /* =========================================================
    6) BLOQUES: texto grande, pasos, antes/después, chips
    ========================================================= */
-.big p{ font-size:clamp(20px,2.6vw,26px); line-height:1.4; font-family:var(--display); font-weight:500; }
-.big p + p{ margin-top:18px; color:var(--dim); font-size:18px; font-family:var(--sans); font-weight:400; }
+.big p:not(.eyebrow){ font-size:clamp(20px,2.6vw,26px); line-height:1.4; font-family:var(--display); font-weight:500; }
+.big p:not(.eyebrow) + p{ margin-top:18px; color:var(--dim); font-size:18px; font-family:var(--sans); font-weight:400; }
 .steps{ margin-top:36px; display:grid; gap:12px; }
 .step{ display:flex; gap:18px; padding:20px 22px; background:var(--surface); border:1px solid var(--line); border-radius:16px; }
 .step .n{ font-family:var(--mono); color:var(--accent); font-size:13px; padding-top:3px; }
