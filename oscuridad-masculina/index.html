@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<!--
+  PLANTILLA LANDING — oscura, con acento de color, fondo de red animado y efectos al scrollear.
+  Todo lo que tenés que cambiar está marcado con [CORCHETES] o dentro del bloque "CONFIG" al final.
+  Tema de color: cambiá data-theme en <html> → "naranja" | "azul" | "verde" | "violeta"
+-->
+<html lang="es" data-theme="rojo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oscuridad Masculina</title>
+<meta name="description" content="Contenido y recursos para hombres que quieren entender su lado oscuro y usarlo a su favor.">
+<meta property="og:title" content="Oscuridad Masculina">
+<meta property="og:description" content="Contenido y recursos para hombres.">
+<meta name="theme-color" content="#121110">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* =========================================================
+   1) TEMAS — para otro proyecto cambiá data-theme arriba
+   ========================================================= */
+:root, [data-theme="naranja"]{ --rgb:255,90,31;  --a1:#ffd9c2; --a2:#ffb020; --a3:#ff5a1f; --a4:#c43d0e; --a5:#ff7a3d; }
+[data-theme="rojo"]   { --rgb:220,38,38; --a1:#fee2e2; --a2:#fca5a5; --a3:#dc2626; --a4:#7f1d1d; --a5:#ef4444; }
+[data-theme="azul"]   { --rgb:59,130,246;  --a1:#dbeafe; --a2:#93c5fd; --a3:#3b82f6; --a4:#1d4ed8; --a5:#60a5fa; }
+[data-theme="verde"]  { --rgb:34,197,94;   --a1:#dcfce7; --a2:#86efac; --a3:#22c55e; --a4:#15803d; --a5:#4ade80; }
+[data-theme="violeta"]{ --rgb:139,92,246;  --a1:#ede9fe; --a2:#c4b5fd; --a3:#8b5cf6; --a4:#6d28d9; --a5:#a78bfa; }
+
+:root{
+  --bg:#121110; --surface:#1c1916; --panel:rgba(28,25,22,.78);
+  --ink:#f4efe8; --dim:#9a9086; --line:#34302a; --line2:#443e36;
+  --accent:var(--a3);
+  --bg:#0a0909; --surface:#141212; --panel:rgba(20,18,18,.78); --line:#2a2424; --line2:#3a3232;
+  --metal:linear-gradient(172deg,var(--a1) 0%,var(--a2) 16%,var(--a3) 38%,var(--a4) 55%,var(--a5) 68%,var(--a3) 86%,var(--a4) 100%);
+  --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --sans:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.23,1,.32,1);
+}
+
+/* =========================================================
+   2) BASE
+   ========================================================= */
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{ background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; }
+a{ color:inherit; text-decoration:none; }
+#net{ position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+header, section, footer{ position:relative; z-index:1; }
+.wrap{ max-width:760px; margin:0 auto; padding:0 24px; }
+.wrap.wide{ max-width:1120px; }
+.sec{ padding:72px 0; }
+.panel{ background:var(--panel); }
+
+h1,h2{ font-family:var(--display); text-transform:none; letter-spacing:-.015em; line-height:1.06; font-weight:600; }
+h1{ font-size:clamp(30px,4.8vw,54px); }
+h2{ font-size:clamp(26px,4.2vw,42px); }
+.accent{ background-image:var(--metal); background-size:100% 280%; -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 18px rgba(var(--rgb),.35)); animation:sweep 9s ease-in-out infinite; }
+@keyframes sweep{ 0%,100%{ background-position:50% 8%; } 50%{ background-position:50% 92%; } }
+.eyebrow{ font-family:var(--mono); font-size:13px; font-weight:500; letter-spacing:.06em; text-transform:none; color:var(--accent); margin-bottom:16px; }
+.eyebrow i{ display:inline-block; width:6px; height:6px; border-radius:50%; background:currentColor; margin-right:9px; vertical-align:middle; animation:ping 2.4s ease-out infinite; }
+@keyframes ping{ 0%{ box-shadow:0 0 0 0 rgba(var(--rgb),.6); } 70%,100%{ box-shadow:0 0 0 9px rgba(var(--rgb),0); } }
+.lead{ color:var(--dim); font-size:18px; max-width:620px; margin-top:16px; }
+.center{ text-align:center; } .center .lead{ margin-left:auto; margin-right:auto; }
+
+.btn{ display:inline-flex; align-items:center; gap:10px; padding:16px 30px; border-radius:999px; border:0; cursor:pointer; background:var(--accent); color:#21100a; font-family:var(--display); font-weight:600; font-size:16px; transition:transform .2s var(--ease), box-shadow .2s var(--ease), filter .2s; }
+.btn:hover{ transform:translateY(-2px); filter:brightness(1.1); box-shadow:0 12px 28px -10px rgba(var(--rgb),.6), 0 0 0 4px rgba(var(--rgb),.18); }
+.btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; box-shadow:none; }
+.cta-row{ margin-top:32px; text-align:center; }
+
+/* =========================================================
+   3) HEADER FIJO + BOTÓN FLOTANTE + BARRA DE PROGRESO
+   ========================================================= */
+.site-head{ position:sticky; top:0; z-index:50; background:rgba(28,25,22,.72); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
+.site-head-in{ max-width:1200px; margin:0 auto; height:64px; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
+.logo{ font-family:var(--display); font-weight:700; font-size:20px; text-transform:none; letter-spacing:-.01em; }
+.logo b{ background-image:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; }
+.head-cta{ font-family:var(--display); font-weight:600; font-size:13.5px; padding:10px 18px; border-radius:999px; border:1px solid var(--accent); color:var(--accent); text-transform:none; letter-spacing:0; transition:background .2s,color .2s; }
+.head-cta:hover{ background:var(--accent); color:#21100a; }
+.float-cta{ position:fixed; right:20px; bottom:20px; z-index:60; display:inline-flex; align-items:center; gap:10px; padding:13px 20px; border-radius:999px; background:rgba(28,25,22,.88); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border:1px solid var(--line2); font-family:var(--display); font-weight:600; font-size:14px; box-shadow:0 0 24px rgba(var(--rgb),.32),0 8px 32px -8px rgba(var(--rgb),.42); transition:opacity .3s, transform .3s var(--ease); }
+.float-cta i{ width:8px; height:8px; border-radius:50%; background:var(--accent); animation:ping 2.4s ease-out infinite; }
+.float-cta.off{ opacity:0; transform:translateY(12px); pointer-events:none; }
+.progress{ position:fixed; top:0; left:0; right:0; height:2px; z-index:100; background:var(--metal); transform:scaleX(0); transform-origin:left; }
+@media(max-width:640px){ .head-cta{ display:none; } .float-cta{ left:16px; right:16px; justify-content:center; } }
+
+/* =========================================================
+   4) PORTADA  — poné tu imagen en --hero-img (o dejala sin imagen)
+   ========================================================= */
+.hero{
+  --hero-img:none;                         /* ej: url("hero.jpg") */
+  padding:96px 0 80px; text-align:center;
+  background:linear-gradient(180deg,rgba(18,17,16,.55),rgba(18,17,16,.85)), var(--hero-img) center/cover no-repeat, radial-gradient(60% 80% at 50% 0%, rgba(var(--rgb),.18), transparent 70%);
+}
+.hero h1{ max-width:860px; margin:0 auto; text-shadow:0 2px 24px rgba(0,0,0,.6); }
+.hero .lead{ margin-left:auto; margin-right:auto; }
+.w-mask{ display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.12em; margin-bottom:-.12em; }
+.w-mask>span{ display:inline-block; transform:translateY(110%); animation:wordup .8s cubic-bezier(.2,.7,.2,1) forwards; animation-delay:var(--wd,0s); }
+@keyframes wordup{ to{ transform:translateY(0); } }
+
+/* =========================================================
+   5) TARJETAS (dolores / beneficios / servicios)
+   ========================================================= */
+.cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px; }
+.card{ position:relative; overflow:hidden; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:22px 22px 24px; min-height:170px; display:flex; flex-direction:column; gap:10px; transition:border-color .25s; }
+.card:hover{ border-color:var(--line2); }
+.card .n{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--accent); opacity:.75; }
+.card h3{ font-family:var(--display); font-weight:700; font-size:clamp(20px,2.2vw,26px); line-height:1.12; letter-spacing:-.01em; }
+.card p{ font-size:14px; color:var(--dim); line-height:1.5; }
+.card::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s; background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%), rgba(var(--rgb),.14), transparent 70%); }
+.card::after{ content:""; position:absolute; left:0; top:22px; bottom:22px; width:2px; border-radius:2px; background:var(--accent); opacity:0; transform:scaleY(.4); transition:opacity .2s, transform .26s var(--ease); }
+.card:hover::before{ opacity:1; } .card:hover::after{ opacity:1; transform:scaleY(1); }
+.card > *{ position:relative; }
+@media(max-width:960px){ .cards{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:640px){ .cards{ grid-template-columns:1fr; } }
+.exit{ margin-top:36px; text-align:center; font-family:var(--display); text-transform:none; font-weight:500; font-size:clamp(18px,2.4vw,22px); line-height:1.35; }
+
+/* =========================================================
+   6) BLOQUES: texto grande, pasos, antes/después, chips
+   ========================================================= */
+.big p:not(.eyebrow){ font-size:clamp(20px,2.6vw,26px); line-height:1.4; font-family:var(--display); font-weight:500; }
+.big p:not(.eyebrow) + p{ margin-top:18px; color:var(--dim); font-size:18px; font-family:var(--sans); font-weight:400; }
+.steps{ margin-top:36px; display:grid; gap:12px; }
+.step{ display:flex; gap:18px; padding:20px 22px; background:var(--surface); border:1px solid var(--line); border-radius:16px; }
+.step .n{ font-family:var(--mono); color:var(--accent); font-size:13px; padding-top:3px; }
+.compare{ margin-top:36px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.compare > div{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px; }
+.compare h4{ font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:14px; }
+.compare .after{ border-color:rgba(var(--rgb),.45); box-shadow:0 0 32px rgba(var(--rgb),.12); }
+.compare .after h4{ color:var(--accent); }
+.compare li{ list-style:none; padding:8px 0; border-top:1px dashed var(--line); font-size:15px; }
+.compare li:first-of-type{ border-top:0; }
+@media(max-width:640px){ .compare{ grid-template-columns:1fr; } }
+.chips{ margin-top:32px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.chip{ padding:10px 18px; border:1px solid var(--line2); border-radius:999px; font-size:14.5px; background:var(--surface); animation:chipglow 4s ease-in-out infinite; animation-delay:var(--cd,0s); }
+@keyframes chipglow{ 0%,100%{ border-color:var(--line2); box-shadow:none; } 50%{ border-color:rgba(var(--rgb),.7); box-shadow:0 0 18px rgba(var(--rgb),.25); } }
+
+/* =========================================================
+   7) LLAMADA FINAL + FORMULARIO DE AGENDADO (Web3Forms)
+   ========================================================= */
+.final{ background:rgba(18,17,16,.55); border-top:1px solid var(--line); }
+.booking{ margin:36px auto 0; max-width:620px; background:var(--surface); border:1px solid var(--line2); border-radius:16px; padding:26px; text-align:left; }
+.bk-label{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin:18px 0 10px; }
+.bk-label:first-child{ margin-top:0; }
+.bk-days,.bk-times{ display:flex; flex-wrap:wrap; gap:8px; }
+.bk-opt{ padding:10px 14px; border-radius:10px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); font:inherit; font-size:14px; cursor:pointer; transition:border-color .2s, background .2s; }
+.bk-opt:hover{ border-color:var(--accent); }
+.bk-opt.sel{ background:var(--accent); color:#21100a; border-color:var(--accent); font-weight:600; }
+.bk-field{ margin-top:12px; }
+.bk-field input{ width:100%; padding:13px 14px; border-radius:10px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); font:inherit; font-size:15px; }
+.bk-field input:focus{ outline:none; border-color:var(--accent); }
+.bk-msg{ margin-top:12px; font-size:14px; color:var(--dim); min-height:20px; }
+.bk-done{ text-align:center; padding:20px 0; }
+.bk-done h3{ font-family:var(--display); text-transform:uppercase; font-size:24px; margin-bottom:8px; }
+
+footer{ padding:48px 0 64px; text-align:center; border-top:1px solid var(--line); }
+.f-brand{ font-family:var(--display); font-weight:600; }
+.f-sub{ color:var(--dim); font-size:14px; margin-top:8px; }
+.f-legal{ color:#6f675d; font-size:12px; margin-top:20px; max-width:560px; margin-left:auto; margin-right:auto; }
+
+/* =========================================================
+   8) ANIMACIONES AL SCROLLEAR
+   ========================================================= */
+.js .reveal{ opacity:0; transform:translateY(24px); transition:opacity .8s var(--ease), transform .8s var(--ease); transition-delay:var(--d,0s); }
+.js .reveal.in{ opacity:1; transform:none; }
+@media(prefers-reduced-motion:reduce){
+  .js .reveal{ opacity:1; transform:none; transition:none; }
+  .accent,.chip,.eyebrow i,.float-cta i{ animation:none; }
+  .w-mask>span{ animation:none; transform:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<canvas id="net" aria-hidden="true"></canvas>
+
+<!-- ====== HEADER ====== -->
+<header class="site-head"><div class="site-head-in">
+  <a class="logo" href="#">Oscuridad <b>Masculina</b></a>
+  <a class="head-cta" href="#agendar">Unirme ahora</a>
+</div></header>
+<a class="float-cta" id="floatcta" href="#agendar"><i></i>Quiero entrar</a>
+
+<!-- ====== PORTADA ====== -->
+<section class="hero">
+  <div class="wrap">
+    <h1>Dejá de ignorar tu lado oscuro. Aprendé a usarlo.</h1>
+    <p class="lead">[Una o dos líneas: para quién es y qué se lleva.]</p>
+    <div class="cta-row"><a href="#agendar" class="btn">Quiero empezar</a></div>
+  </div>
+</section>
+
+<!-- ====== PROBLEMAS / BENEFICIOS (tarjetas) ====== -->
+<section class="sec panel">
+  <div class="wrap wide">
+    <p class="eyebrow reveal"><i></i>01 · Lo que nadie te cuenta</p>
+    <h2 class="reveal">Lo que viene <span class="accent">después</span> de aceptarlo</h2>
+    <p class="lead reveal">[Frase que introduce los temas.]</p>
+
+    <div class="cards">
+      <article class="card reveal"><span class="n">01</span><h3>[Tema 1]</h3><p>[Una línea que explique este tema.]</p></article>
+      <article class="card reveal"><span class="n">02</span><h3>[Tema 2]</h3><p>[Una línea que explique este tema.]</p></article>
+      <article class="card reveal"><span class="n">03</span><h3>[Tema 3]</h3><p>[Una línea que explique este tema.]</p></article>
+      <article class="card reveal"><span class="n">04</span><h3>[Tema 4]</h3><p>[Una línea que explique este tema.]</p></article>
+      <article class="card reveal"><span class="n">05</span><h3>[Tema 5]</h3><p>[Una línea que explique este tema.]</p></article>
+      <article class="card reveal"><span class="n">06</span><h3>[Tema 6]</h3><p>[Una línea que explique este tema.]</p></article>
+    </div>
+    <p class="exit reveal">[Frase puente hacia la acción.]</p>
+    <div class="cta-row reveal"><a href="#agendar" class="btn">Quiero empezar</a></div>
+  </div>
+</section>
+
+<!-- ====== TEXTO GRANDE ====== -->
+<section class="sec big">
+  <div class="wrap">
+    <p class="eyebrow reveal"><i></i>02 · La idea</p>
+    <p class="reveal">[Afirmación fuerte de una o dos líneas.]</p>
+    <p class="reveal">[Explicación breve que la respalda.]</p>
+  </div>
+</section>
+
+<!-- ====== CÓMO FUNCIONA (pasos) + ANTES/DESPUÉS ====== -->
+<section class="sec panel">
+  <div class="wrap">
+    <p class="eyebrow reveal"><i></i>03 · Cómo funciona</p>
+    <h2 class="reveal">Tres pasos para <span class="accent">empezar</span></h2>
+    <div class="steps">
+      <div class="step reveal"><span class="n">01</span><div>[Paso uno.]</div></div>
+      <div class="step reveal"><span class="n">02</span><div>[Paso dos.]</div></div>
+      <div class="step reveal"><span class="n">03</span><div>[Paso tres.]</div></div>
+    </div>
+    <div class="compare reveal">
+      <div><h4>Antes</h4><ul><li>[Cómo está hoy 1]</li><li>[Cómo está hoy 2]</li><li>[Cómo está hoy 3]</li></ul></div>
+      <div class="after"><h4>Después</h4><ul><li>[Cómo queda 1]</li><li>[Cómo queda 2]</li><li>[Cómo queda 3]</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CHIPS ====== -->
+<section class="sec center">
+  <div class="wrap">
+    <h2 class="reveal">¿Qué vas a <span class="accent">encontrar</span>?</h2>
+    <div class="chips">
+      <span class="chip reveal" style="--cd:0s">[Tema]</span><span class="chip reveal" style="--cd:.5s">[Tema]</span>
+      <span class="chip reveal" style="--cd:1s">[Tema]</span><span class="chip reveal" style="--cd:1.5s">[Tema]</span>
+      <span class="chip reveal" style="--cd:2s">[Tema]</span><span class="chip reveal" style="--cd:2.5s">[Tema]</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== LLAMADA FINAL + AGENDADO ====== -->
+<section class="sec final center" id="agendar">
+  <div class="wrap">
+    <p class="eyebrow reveal"><i></i>Unite hoy</p>
+    <h2 class="reveal">Da el primer <span class="accent">paso</span></h2>
+    <p class="lead reveal">[Invitación final: elegí día y hora o dejá tus datos.]</p>
+    <div class="booking reveal" id="booking">
+      <div class="bk-label">1 · Elegí el día</div><div class="bk-days" id="bk-days"></div>
+      <div class="bk-label">2 · Elegí la hora</div><div class="bk-times" id="bk-times"></div>
+      <div class="bk-label">3 · Tus datos</div>
+      <div class="bk-field"><input id="bk-name" placeholder="Tu nombre" autocomplete="name"></div>
+      <div class="bk-field"><input id="bk-email" type="email" placeholder="Tu email" autocomplete="email"></div>
+      <div class="bk-field"><input id="bk-phone" placeholder="Tu WhatsApp (opcional)" autocomplete="tel"></div>
+      <div class="cta-row"><button class="btn" id="bk-submit" disabled>Reservar mi lugar</button></div>
+      <p class="bk-msg" id="bk-msg"></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-brand">Oscuridad Masculina</div>
+    <p class="f-sub">[Una línea sobre qué es este proyecto.]</p>
+    <p class="f-legal"></p>
+  </div>
+</footer>
+
+<!-- =========================================================
+     CONFIG + JS  (no hace falta tocar nada más que CONFIG)
+     ========================================================= -->
+<script>
+var CONFIG = {
+  accessKey: 'TU_ACCESS_KEY_DE_WEB3FORMS',   // gratis en web3forms.com, la clave te llega por email
+  subject:   'Nueva reserva',
+  fromName:  'Landing Oscuridad Masculina',
+  tz:        'America/Argentina/Buenos_Aires',
+  daysAhead: 14,
+  weekdays:  [1,2,3,4,5],                    // 0=dom ... 6=sáb
+  times:     ['10:00','11:00','12:00','15:00','16:00','17:00']
+};
+
+/* ---- scroll reveal, spotlight, progreso, botón flotante ---- */
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.reveal'));
+  els.forEach(function(el){ var i=[].indexOf.call(el.parentNode.children,el); el.style.setProperty('--d',Math.min(i*.06,.5)+'s'); });
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); }
+  else{ var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{threshold:.12,rootMargin:'0px 0px -6% 0px'}); els.forEach(function(e){io.observe(e);}); }
+  document.querySelectorAll('.card').forEach(function(el){ el.addEventListener('mousemove',function(ev){ var r=el.getBoundingClientRect(); el.style.setProperty('--mx',(ev.clientX-r.left)+'px'); el.style.setProperty('--my',(ev.clientY-r.top)+'px'); }); });
+  var bar=document.getElementById('progress'),tick=false;
+  function upd(){ var m=document.documentElement.scrollHeight-innerHeight; bar.style.transform='scaleX('+(m>0?Math.min(scrollY/m,1):0)+')'; tick=false; }
+  addEventListener('scroll',function(){ if(!tick){ tick=true; requestAnimationFrame(upd);} },{passive:true}); upd();
+  var f=document.getElementById('floatcta'),t=document.getElementById('agendar');
+  if(f&&t&&'IntersectionObserver' in window){ new IntersectionObserver(function(es){ f.classList.toggle('off',es[0].isIntersecting); },{threshold:.15}).observe(t); }
+  var h=document.querySelector('.hero h1');
+  if(h&&!matchMedia('(prefers-reduced-motion: reduce)').matches){ var w=h.textContent.trim().split(/\s+/); h.setAttribute('aria-label',h.textContent.trim());
+    h.innerHTML=w.map(function(x,i){ return '<span class="w-mask" aria-hidden="true"><span style="--wd:'+(.1+i*.07).toFixed(2)+'s">'+x+'</span></span>'; }).join(' '); }
+})();
+
+/* ---- fondo de red animado (usa el color del tema) ---- */
+(function(){
+  var cv=document.getElementById('net'),ctx=cv.getContext('2d'),W,H,dpr=Math.min(devicePixelRatio||1,2),pts=[],m={x:-999,y:-999};
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rgb=getComputedStyle(document.documentElement).getPropertyValue('--rgb').trim()||'255,90,31';
+  function size(){ W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0); var n=Math.round(Math.min(70,W*H/22000)); pts=[]; for(var i=0;i<n;i++) pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25}); }
+  function draw(){ ctx.clearRect(0,0,W,H);
+    for(var i=0;i<pts.length;i++){ var a=pts[i];
+      if(!reduce){ a.x+=a.vx;a.y+=a.vy; if(a.x<0||a.x>W)a.vx*=-1; if(a.y<0||a.y>H)a.vy*=-1; }
+      for(var j=i+1;j<pts.length;j++){ var b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy; if(d<24000){ ctx.strokeStyle='rgba('+rgb+','+(.22*(1-d/24000)).toFixed(3)+')'; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); } }
+      var md=Math.hypot(a.x-m.x,a.y-m.y),near=md<160;
+      if(near){ ctx.strokeStyle='rgba('+rgb+','+(.55*(1-md/160)).toFixed(3)+')'; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(m.x,m.y); ctx.stroke(); }
+      ctx.fillStyle='rgba('+rgb+','+(near?.95:.6)+')'; ctx.beginPath(); ctx.arc(a.x,a.y,near?2.4:1.6,0,6.283); ctx.fill(); }
+    if(!reduce) requestAnimationFrame(draw); }
+  addEventListener('resize',size); addEventListener('mousemove',function(e){m.x=e.clientX;m.y=e.clientY;},{passive:true}); size(); draw();
+})();
+
+/* ---- agendado: envía un email con Web3Forms ---- */
+(function(){
+  var DN=['dom','lun','mar','mié','jue','vie','sáb'],MN=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  var $=function(i){return document.getElementById(i);}, sel={day:null,time:null};
+  var parts=new Intl.DateTimeFormat('en-CA',{timeZone:CONFIG.tz}).format(new Date()).split('-').map(Number);
+  var base=new Date(Date.UTC(parts[0],parts[1]-1,parts[2])),days=[];
+  for(var i=1;days.length<CONFIG.daysAhead&&i<60;i++){ var d=new Date(base.getTime()+i*864e5); if(CONFIG.weekdays.indexOf(d.getUTCDay())>-1) days.push(d); }
+  function btn(t,fn,box){ var b=document.createElement('button'); b.type='button'; b.className='bk-opt'; b.textContent=t; b.onclick=function(){ [].forEach.call(box.children,function(c){c.classList.remove('sel');}); b.classList.add('sel'); fn(); check(); }; box.appendChild(b); }
+  days.forEach(function(d){ var l=DN[d.getUTCDay()]+' '+d.getUTCDate()+' '+MN[d.getUTCMonth()]; btn(l,function(){sel.day=l;},$('bk-days')); });
+  CONFIG.times.forEach(function(t){ btn(t+' hs',function(){sel.time=t;},$('bk-times')); });
+  function ok(){ return sel.day&&sel.time&&$('bk-name').value.trim()&&/\S+@\S+\.\S+/.test($('bk-email').value); }
+  function check(){ $('bk-submit').disabled=!ok(); }
+  ['bk-name','bk-email'].forEach(function(i){ $(i).addEventListener('input',check); });
+  $('bk-submit').onclick=function(){
+    if(!ok()) return; var msg=$('bk-msg');
+    if(CONFIG.accessKey.indexOf('TU_ACCESS_KEY')===0){ msg.textContent='Modo demo: falta pegar tu clave de Web3Forms en CONFIG.accessKey.'; return; }
+    $('bk-submit').disabled=true; msg.textContent='Enviando…';
+    var fd=new FormData(); fd.append('access_key',CONFIG.accessKey); fd.append('subject',CONFIG.subject+' — '+sel.day+' '+sel.time); fd.append('from_name',CONFIG.fromName);
+    fd.append('Nombre',$('bk-name').value); fd.append('Email',$('bk-email').value); fd.append('WhatsApp',$('bk-phone').value); fd.append('Día',sel.day); fd.append('Hora',sel.time);
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{Accept:'application/json'},body:fd}).then(function(r){return r.json();}).then(function(j){
+      if(j.success){ $('booking').innerHTML='<div class="bk-done"><h3>¡Listo!</h3><p>Pedido recibido para el '+sel.day+' a las '+sel.time+' hs. Te escribo por email para confirmarlo.</p></div>'; }
+      else{ msg.textContent='No se pudo enviar. Probá de nuevo.'; $('bk-submit').disabled=false; } }).catch(function(){ msg.textContent='Error de conexión. Probá de nuevo.'; $('bk-submit').disabled=false; });
+  };
+})();
+</script>
+</body>
+</html>
