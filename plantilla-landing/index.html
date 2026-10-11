@@ -137,19 +137,41 @@ h2{ font-size:clamp(26px,4.2vw,42px); }
    7) LLAMADA FINAL + FORMULARIO DE AGENDADO (Web3Forms)
    ========================================================= */
 .final{ background:rgba(18,17,16,.55); border-top:1px solid var(--line); }
-.booking{ margin:36px auto 0; max-width:620px; background:var(--surface); border:1px solid var(--line2); border-radius:16px; padding:26px; text-align:left; }
-.bk-label{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin:18px 0 10px; }
-.bk-label:first-child{ margin-top:0; }
-.bk-days,.bk-times{ display:flex; flex-wrap:wrap; gap:8px; }
-.bk-opt{ padding:10px 14px; border-radius:10px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); font:inherit; font-size:14px; cursor:pointer; transition:border-color .2s, background .2s; }
-.bk-opt:hover{ border-color:var(--accent); }
-.bk-opt.sel{ background:var(--accent); color:#21100a; border-color:var(--accent); font-weight:600; }
-.bk-field{ margin-top:12px; }
-.bk-field input{ width:100%; padding:13px 14px; border-radius:10px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); font:inherit; font-size:15px; }
-.bk-field input:focus{ outline:none; border-color:var(--accent); }
-.bk-msg{ margin-top:12px; font-size:14px; color:var(--dim); min-height:20px; }
-.bk-done{ text-align:center; padding:20px 0; }
-.bk-done h3{ font-family:var(--display); text-transform:uppercase; font-size:24px; margin-bottom:8px; }
+.booking{ margin:36px auto 0; max-width:760px; background:var(--surface); border:1px solid var(--line2); border-radius:20px; padding:28px; text-align:left; }
+.bk-steps{ list-style:none; display:flex; gap:10px; margin:0 0 24px; padding:0; font-size:14px; color:var(--dim); }
+.bk-steps li{ display:flex; align-items:center; gap:8px; }
+.bk-steps li + li::before{ content:""; width:28px; height:1px; background:var(--line2); margin-right:2px; }
+.bk-steps span{ width:24px; height:24px; border-radius:50%; border:1px solid var(--line2); display:inline-flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:12px; }
+.bk-steps li.on{ color:var(--ink); } .bk-steps li.on span{ background:var(--accent); border-color:var(--accent); color:#21100a; font-weight:600; }
+.bk-field{ margin-bottom:14px; }
+.bk-field label{ display:block; font-family:var(--mono); font-size:12px; color:var(--dim); margin-bottom:6px; }
+.bk-field input{ width:100%; padding:14px 16px; border-radius:12px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); font:inherit; font-size:16px; }
+.bk-field input:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 4px rgba(var(--rgb),.15); }
+.bk-next,.bk-confirm{ width:100%; justify-content:center; margin-top:8px; }
+.bk-hint{ margin-top:12px; font-size:13px; color:var(--dim); text-align:center; }
+.bk-who{ font-size:15px; margin-bottom:18px; color:var(--dim); } .bk-who b{ color:var(--ink); }
+.bk-link{ background:none; border:0; color:var(--accent); font:inherit; font-size:14px; cursor:pointer; text-decoration:underline; padding:0; margin-left:6px; }
+.bk-layout{ display:grid; grid-template-columns:1.25fr 1fr; gap:24px; }
+.bk-calhead{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; font-family:var(--display); font-size:18px; text-transform:capitalize; }
+.bk-nav{ width:36px; height:36px; border-radius:50%; border:1px solid var(--line2); background:transparent; color:var(--ink); font-size:20px; line-height:1; cursor:pointer; transition:border-color .2s, opacity .2s; }
+.bk-nav:hover:not(:disabled){ border-color:var(--accent); } .bk-nav:disabled{ opacity:.3; cursor:default; }
+.bk-dow,.bk-days{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
+.bk-dow{ margin-bottom:6px; text-align:center; font-family:var(--mono); font-size:12px; color:var(--dim); }
+.bk-days{ display:grid; }
+.bk-day{ aspect-ratio:1; border-radius:50%; border:0; background:transparent; color:#5d564d; font:inherit; font-size:15px; display:flex; align-items:center; justify-content:center; cursor:default; }
+.bk-day.ok{ color:var(--ink); background:rgba(var(--rgb),.14); cursor:pointer; font-weight:600; transition:background .15s, transform .15s; }
+.bk-day.ok:hover{ background:rgba(var(--rgb),.3); transform:scale(1.06); }
+.bk-day.sel{ background:var(--accent); color:#21100a; }
+.bk-tz{ margin-top:14px; font-size:12.5px; color:var(--dim); }
+.bk-slotsday{ font-family:var(--display); font-size:17px; margin-bottom:12px; text-transform:none; }
+.bk-times{ display:grid; gap:8px; grid-template-columns:repeat(2,1fr); }
+.bk-time{ padding:12px; border-radius:12px; border:1px solid rgba(var(--rgb),.55); background:transparent; color:var(--accent); font:inherit; font-size:15px; font-weight:600; cursor:pointer; text-align:center; transition:background .15s,color .15s; }
+.bk-time:hover{ background:rgba(var(--rgb),.15); } .bk-time.sel{ background:var(--accent); color:#21100a; }
+.bk-times .bk-empty{ color:var(--dim); font-size:14px; }
+.bk-msg{ margin-top:12px; font-size:14px; color:var(--dim); min-height:20px; text-align:center; }
+.bk-done{ text-align:center; padding:24px 0; } .bk-done h3{ font-family:var(--display); font-size:26px; margin-bottom:8px; }
+@media(max-width:700px){ .booking{ padding:20px; } .bk-layout{ grid-template-columns:1fr; } .bk-times{ grid-template-columns:repeat(2,1fr); max-height:none; } }
+@media(max-width:700px){ .booking{ padding:20px; } .bk-layout{ grid-template-columns:1fr; } .bk-times{ grid-template-columns:repeat(2,1fr); max-height:none; } }
 
 footer{ padding:48px 0 64px; text-align:center; border-top:1px solid var(--line); }
 .f-brand{ font-family:var(--display); font-weight:600; }
@@ -254,14 +276,33 @@ footer{ padding:48px 0 64px; text-align:center; border-top:1px solid var(--line)
     <h2 class="reveal">[Cierre con <span class="accent">palabra clave</span>]</h2>
     <p class="lead reveal">[Invitación: elegí día y hora.]</p>
     <div class="booking reveal" id="booking">
-      <div class="bk-label">1 · Elegí el día</div><div class="bk-days" id="bk-days"></div>
-      <div class="bk-label">2 · Elegí la hora</div><div class="bk-times" id="bk-times"></div>
-      <div class="bk-label">3 · Tus datos</div>
-      <div class="bk-field"><input id="bk-name" placeholder="Tu nombre" autocomplete="name"></div>
-      <div class="bk-field"><input id="bk-email" type="email" placeholder="Tu email" autocomplete="email"></div>
-      <div class="bk-field"><input id="bk-phone" placeholder="Tu WhatsApp (opcional)" autocomplete="tel"></div>
-      <div class="cta-row"><button class="btn" id="bk-submit" disabled>[Texto del botón de envío]</button></div>
-      <p class="bk-msg" id="bk-msg"></p>
+      <ol class="bk-steps"><li class="on" id="bk-s1"><span>1</span>Tus datos</li><li id="bk-s2"><span>2</span>Fecha y hora</li></ol>
+
+      <div id="bk-step1">
+        <div class="bk-field"><label for="bk-name">Nombre</label><input id="bk-name" placeholder="Tu nombre" autocomplete="name"></div>
+        <div class="bk-field"><label for="bk-email">Email</label><input id="bk-email" type="email" placeholder="tu@email.com" autocomplete="email"></div>
+        <div class="bk-field"><label for="bk-phone">WhatsApp</label><input id="bk-phone" type="tel" placeholder="+54 9 11 1234 5678" autocomplete="tel"></div>
+        <button class="btn bk-next" id="bk-next" disabled>Continuar</button>
+        <p class="bk-hint">Después de este paso elegís el día y la hora.</p>
+      </div>
+
+      <div id="bk-step2" hidden>
+        <p class="bk-who">Hola, <b id="bk-hello"></b>. <button type="button" class="bk-link" id="bk-back">Cambiar mis datos</button></p>
+        <div class="bk-layout">
+          <div class="bk-cal">
+            <div class="bk-calhead"><button type="button" class="bk-nav" id="bk-prev" aria-label="Mes anterior">&#8249;</button><strong id="bk-month"></strong><button type="button" class="bk-nav" id="bk-nextm" aria-label="Mes siguiente">&#8250;</button></div>
+            <div class="bk-dow"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+            <div class="bk-days" id="bk-days"></div>
+            <p class="bk-tz" id="bk-tz"></p>
+          </div>
+          <div class="bk-slots">
+            <p class="bk-slotsday" id="bk-slotsday">Elegí un día</p>
+            <div class="bk-times" id="bk-times"></div>
+          </div>
+        </div>
+        <button class="btn bk-confirm" id="bk-submit" disabled>Confirmar mi auditoría</button>
+        <p class="bk-msg" id="bk-msg"></p>
+      </div>
     </div>
   </div>
 </section>
@@ -283,7 +324,7 @@ var CONFIG = {
   subject:   'Nueva llamada agendada',
   fromName:  'Landing [MARCA]',
   tz:        'America/Argentina/Buenos_Aires',
-  daysAhead: 14,
+  daysAhead: 45,
   weekdays:  [1,2,3,4,5],                    // 0=dom ... 6=sáb
   times:     ['10:00','11:00','12:00','15:00','16:00','17:00']
 };
@@ -322,27 +363,56 @@ var CONFIG = {
   addEventListener('resize',size); addEventListener('mousemove',function(e){m.x=e.clientX;m.y=e.clientY;},{passive:true}); size(); draw();
 })();
 
-/* ---- agendado: envía un email con Web3Forms ---- */
+/* ---- agendado: datos primero, después calendario (envía email con Web3Forms) ---- */
 (function(){
-  var DN=['dom','lun','mar','mié','jue','vie','sáb'],MN=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-  var $=function(i){return document.getElementById(i);}, sel={day:null,time:null};
-  var parts=new Intl.DateTimeFormat('en-CA',{timeZone:CONFIG.tz}).format(new Date()).split('-').map(Number);
-  var base=new Date(Date.UTC(parts[0],parts[1]-1,parts[2])),days=[];
-  for(var i=1;days.length<CONFIG.daysAhead&&i<60;i++){ var d=new Date(base.getTime()+i*864e5); if(CONFIG.weekdays.indexOf(d.getUTCDay())>-1) days.push(d); }
-  function btn(t,fn,box){ var b=document.createElement('button'); b.type='button'; b.className='bk-opt'; b.textContent=t; b.onclick=function(){ [].forEach.call(box.children,function(c){c.classList.remove('sel');}); b.classList.add('sel'); fn(); check(); }; box.appendChild(b); }
-  days.forEach(function(d){ var l=DN[d.getUTCDay()]+' '+d.getUTCDate()+' '+MN[d.getUTCMonth()]; btn(l,function(){sel.day=l;},$('bk-days')); });
-  CONFIG.times.forEach(function(t){ btn(t+' hs',function(){sel.time=t;},$('bk-times')); });
-  function ok(){ return sel.day&&sel.time&&$('bk-name').value.trim()&&/\S+@\S+\.\S+/.test($('bk-email').value); }
-  function check(){ $('bk-submit').disabled=!ok(); }
-  ['bk-name','bk-email'].forEach(function(i){ $(i).addEventListener('input',check); });
+  var MES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
+      DIA=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  var $=function(i){return document.getElementById(i);};
+  if(!$('booking')) return;
+  var f=new Intl.DateTimeFormat('en-CA',{timeZone:CONFIG.tz}).format(new Date()).split('-').map(Number);
+  var today=Date.UTC(f[0],f[1]-1,f[2]), last=today+CONFIG.daysAhead*864e5;
+  var view={y:f[0],m:f[1]-1}, sel={day:null,time:null,label:''};
+  function okDay(ts){ var d=new Date(ts); return ts>today&&ts<=last&&CONFIG.weekdays.indexOf(d.getUTCDay())>-1; }
+  function validData(){ return $('bk-name').value.trim().length>1 && /\S+@\S+\.\S+/.test($('bk-email').value) && $('bk-phone').value.replace(/\D/g,'').length>=8; }
+  ['bk-name','bk-email','bk-phone'].forEach(function(i){ $(i).addEventListener('input',function(){ $('bk-next').disabled=!validData(); }); });
+  function go(n){ $('bk-step1').hidden=n!==1; $('bk-step2').hidden=n!==2; $('bk-s1').classList.toggle('on',n===1); $('bk-s2').classList.toggle('on',n===2); }
+  $('bk-next').onclick=function(){ if(!validData()) return; $('bk-hello').textContent=$('bk-name').value.trim().split(' ')[0]; go(2); render(); };
+  $('bk-back').onclick=function(){ go(1); };
+  $('bk-tz').textContent='Horario de '+CONFIG.tz.split('/').pop().replace(/_/g,' ')+' (GMT-3)';
+  function render(){
+    var first=Date.UTC(view.y,view.m,1), dim=new Date(Date.UTC(view.y,view.m+1,0)).getUTCDate(), off=(new Date(first).getUTCDay()+6)%7, h='';
+    $('bk-month').textContent=MES[view.m]+' '+view.y;
+    for(var i=0;i<off;i++) h+='<span></span>';
+    for(var d=1;d<=dim;d++){ var ts=Date.UTC(view.y,view.m,d), ok=okDay(ts);
+      h+='<button type="button" class="bk-day'+(ok?' ok':'')+(sel.day===ts?' sel':'')+'" '+(ok?'data-ts="'+ts+'"':'disabled')+'>'+d+'</button>'; }
+    $('bk-days').innerHTML=h;
+    var lastDate=new Date(last), firstDate=new Date(today);
+    $('bk-prev').disabled=(view.y*12+view.m)<=(firstDate.getUTCFullYear()*12+firstDate.getUTCMonth());
+    $('bk-nextm').disabled=(view.y*12+view.m)>=(lastDate.getUTCFullYear()*12+lastDate.getUTCMonth());
+  }
+  $('bk-prev').onclick=function(){ view.m--; if(view.m<0){view.m=11;view.y--;} render(); };
+  $('bk-nextm').onclick=function(){ view.m++; if(view.m>11){view.m=0;view.y++;} render(); };
+  $('bk-days').addEventListener('click',function(e){
+    var b=e.target.closest('.bk-day.ok'); if(!b) return;
+    sel.day=+b.dataset.ts; sel.time=null; var d=new Date(sel.day);
+    sel.label=DIA[d.getUTCDay()]+' '+d.getUTCDate()+' de '+MES[d.getUTCMonth()];
+    $('bk-slotsday').textContent=sel.label.charAt(0).toUpperCase()+sel.label.slice(1); $('bk-submit').disabled=true;
+    $('bk-times').innerHTML=CONFIG.times.map(function(t){ return '<button type="button" class="bk-time" data-t="'+t+'">'+t+' hs</button>'; }).join('');
+    render();
+  });
+  $('bk-times').addEventListener('click',function(e){
+    var b=e.target.closest('.bk-time'); if(!b) return;
+    [].forEach.call($('bk-times').children,function(c){c.classList.remove('sel');}); b.classList.add('sel');
+    sel.time=b.dataset.t; $('bk-submit').disabled=false;
+  });
   $('bk-submit').onclick=function(){
-    if(!ok()) return; var msg=$('bk-msg');
+    if(!sel.day||!sel.time) return; var msg=$('bk-msg');
     if(CONFIG.accessKey.indexOf('TU_ACCESS_KEY')===0){ msg.textContent='Modo demo: falta pegar tu clave de Web3Forms en CONFIG.accessKey.'; return; }
     $('bk-submit').disabled=true; msg.textContent='Enviando…';
-    var fd=new FormData(); fd.append('access_key',CONFIG.accessKey); fd.append('subject',CONFIG.subject+' — '+sel.day+' '+sel.time); fd.append('from_name',CONFIG.fromName);
-    fd.append('Nombre',$('bk-name').value); fd.append('Email',$('bk-email').value); fd.append('WhatsApp',$('bk-phone').value); fd.append('Día',sel.day); fd.append('Hora',sel.time);
+    var fd=new FormData(); fd.append('access_key',CONFIG.accessKey); fd.append('subject',CONFIG.subject+' — '+sel.label+' '+sel.time); fd.append('from_name',CONFIG.fromName);
+    fd.append('Nombre',$('bk-name').value.trim()); fd.append('Email',$('bk-email').value.trim()); fd.append('WhatsApp',$('bk-phone').value.trim()); fd.append('Día',sel.label); fd.append('Hora',sel.time+' hs ('+CONFIG.tz+')');
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{Accept:'application/json'},body:fd}).then(function(r){return r.json();}).then(function(j){
-      if(j.success){ $('booking').innerHTML='<div class="bk-done"><h3>¡Listo!</h3><p>Pedido recibido para el '+sel.day+' a las '+sel.time+' hs. Te escribo por email para confirmarlo.</p></div>'; }
+      if(j.success){ $('booking').innerHTML='<div class="bk-done"><h3>¡Listo!</h3><p>Pedido recibido para el '+sel.label+' a las '+sel.time+' hs. Te escribo por email para confirmarlo.</p></div>'; }
       else{ msg.textContent='No se pudo enviar. Probá de nuevo.'; $('bk-submit').disabled=false; } }).catch(function(){ msg.textContent='Error de conexión. Probá de nuevo.'; $('bk-submit').disabled=false; });
   };
 })();
