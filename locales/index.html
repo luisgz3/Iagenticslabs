@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asistente de IA para tu negocio | IAgentics Labs</title>
+<meta name="description" content="Un asistente de IA que responde tu WhatsApp, contesta consultas y agenda turnos las 24 horas. Demo gratis con la info de tu negocio en 24 hs.">
+<meta property="og:title" content="Tu WhatsApp respondiendo solo, las 24 horas">
+<meta property="og:description" content="Demo gratis armada con la info de tu negocio en 24 hs.">
+<meta name="theme-color" content="#141110">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root {
+    --bg: #141110; --bg2: #1C1816; --card: #221D1A; --line: #352E29;
+    --text: #F5F1EA; --muted: #A79C92; --soft: #C9BFB5;
+    --accent: #FF6A3D; --accent2: #FF835E; --ok: #3DDC84;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: Manrope, system-ui, sans-serif; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; line-height: 1.12; margin: 0; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(34px, 6vw, 58px); }
+  h2 { font-size: clamp(28px, 4.2vw, 42px); }
+  h3 { font-size: 20px; }
+  p { margin: 0; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .hl { color: var(--accent); }
+  section { padding: 84px 0; }
+  .muted { color: var(--muted); }
+
+  /* nav */
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(20,17,16,.86); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 19px; }
+  .logo span { color: var(--accent); }
+
+  /* buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 26px; border-radius: 12px; font-weight: 800; font-size: 16px; cursor: pointer; border: 0; transition: background .15s, transform .1s, border-color .15s; }
+  .btn:active { transform: scale(.98); }
+  .btn-main { background: var(--accent); color: #141110; }
+  .btn-main:hover { background: var(--accent2); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--text); background: transparent; }
+  .btn-ghost:hover { border-color: var(--accent); }
+  .btn-sm { padding: 10px 16px; font-size: 14px; border-radius: 10px; }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+
+  /* hero */
+  .hero { padding: 64px 0 80px; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+  .hero p.lead { font-size: 19px; color: var(--soft); margin: 22px 0 30px; max-width: 560px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .proof { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 26px; font-size: 14px; color: var(--muted); }
+  .proof b { color: var(--text); }
+  .proof div::before { content: "✓ "; color: var(--ok); font-weight: 800; }
+
+  /* phone */
+  .phone { background: #0B141A; border: 1px solid var(--line); border-radius: 28px; padding: 0; overflow: hidden; max-width: 380px; margin: 0 auto; box-shadow: 0 30px 80px -30px rgba(255,106,61,.35); }
+  .phone-top { background: #202C33; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; font-weight: 800; color: #141110; font-size: 15px; }
+  .phone-top b { display: block; font-size: 15px; }
+  .phone-top small { color: var(--ok); font-size: 12px; }
+  .chat { padding: 18px 14px; display: flex; flex-direction: column; gap: 10px; min-height: 380px; font-size: 14.5px; line-height: 1.45; }
+  .msg { max-width: 82%; padding: 9px 12px; border-radius: 10px; opacity: 0; transform: translateY(8px); transition: opacity .35s, transform .35s; }
+  .msg.show { opacity: 1; transform: none; }
+  .msg.in { background: #202C33; align-self: flex-start; border-top-left-radius: 2px; }
+  .msg.out { background: #005C4B; align-self: flex-end; border-top-right-radius: 2px; }
+  .msg time { display: block; text-align: right; font-size: 11px; color: rgba(255,255,255,.5); margin-top: 3px; }
+  .typing { align-self: flex-end; background: #005C4B; padding: 10px 14px; border-radius: 10px; display: none; gap: 4px; }
+  .typing.show { display: flex; }
+  .typing i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.7); animation: dot 1s infinite; }
+  .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+  @keyframes dot { 0%,60%,100% { opacity: .3; } 30% { opacity: 1; } }
+
+  /* cards */
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+  .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 44px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+  .card h3 { margin-bottom: 10px; }
+  .card p { color: var(--soft); font-size: 16px; }
+  .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-weight: 700; font-size: 14px; margin-bottom: 14px; display: block; }
+  .pain .card { border-left: 3px solid var(--accent); }
+  .section-head { max-width: 720px; }
+  .section-head p { color: var(--soft); margin-top: 16px; font-size: 18px; }
+  .alt { background: var(--bg2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  /* chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+  .chip { border: 1px solid var(--line); background: var(--card); padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: 15px; }
+
+  /* includes list */
+  .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .list li { display: flex; gap: 12px; align-items: flex-start; color: var(--soft); }
+  .list li::before { content: ""; flex: none; width: 22px; height: 22px; margin-top: 2px; border-radius: 6px; background: rgba(255,106,61,.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF6A3D' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/14px no-repeat; }
+  .list b { color: var(--text); }
+
+  /* calculator */
+  .calc { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 44px; align-items: stretch; }
+  .field { margin-bottom: 22px; }
+  .field label { display: flex; justify-content: space-between; font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+  .field label output { font-family: 'JetBrains Mono', monospace; color: var(--accent); }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .result { background: linear-gradient(160deg, rgba(255,106,61,.16), rgba(255,106,61,.03)); border: 1px solid rgba(255,106,61,.45); border-radius: 18px; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+  .big { font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 6vw, 60px); font-weight: 700; color: var(--accent); line-height: 1; margin: 12px 0; }
+  .result small { color: var(--muted); font-size: 13px; margin-top: 14px; display: block; }
+
+  /* faq */
+  .faq { margin-top: 40px; display: grid; gap: 12px; max-width: 820px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; }
+  summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 20px; line-height: 1; }
+  details[open] summary::after { content: "−"; }
+  details p { color: var(--soft); margin-top: 12px; font-size: 16px; }
+
+  /* final cta */
+  .final { text-align: center; }
+  .final .box { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 56px 24px; }
+  .final p { color: var(--soft); max-width: 560px; margin: 18px auto 30px; font-size: 18px; }
+  footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: 14px; text-align: center; }
+
+  /* sticky mobile cta */
+  .sticky { display: none; }
+
+  @media (max-width: 880px) {
+    .hero-grid, .calc { grid-template-columns: 1fr; gap: 40px; }
+    .grid3, .grid2 { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+    .hero { padding: 36px 0 60px; }
+    nav .btn { display: none; }
+    .sticky { display: block; position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: rgba(20,17,16,.95); border-top: 1px solid var(--line); z-index: 20; }
+    .sticky .btn { width: 100%; }
+    footer { padding-bottom: 100px; }
+  }
+  @media (max-width: 480px) { .ctas .btn { width: 100%; } }
+  @media (prefers-reduced-motion: reduce) { .msg { transition: none; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="../" class="logo">IAgentics<span>.</span>Labs</a>
+    <a class="btn btn-main btn-sm js-wa" href="#">Quiero mi demo gratis</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag">Para negocios con local o consultorio</span>
+      <h1 style="margin-top:16px">Tu WhatsApp respondiendo solo, <span class="hl">las 24 horas</span>, y agendando clientes por vos.</h1>
+      <p class="lead">Un asistente de IA entrenado con la información de tu negocio: contesta precios, horarios y dudas en segundos, toma los datos del cliente y le da turno. Vos atendés, él no deja escapar ninguna consulta.</p>
+      <div class="ctas">
+        <a class="btn btn-main js-wa" href="#">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.6-.1 1z"/></svg>
+          Quiero mi demo gratis
+        </a>
+        <a class="btn btn-ghost" href="#como">Cómo funciona</a>
+      </div>
+      <div class="proof">
+        <div><b>Demo en 24 hs</b> con tu negocio</div>
+        <div>Sin cambiar tu número</div>
+        <div>Listo en una semana</div>
+      </div>
+    </div>
+
+    <div class="phone" aria-label="Ejemplo de conversación con el asistente">
+      <div class="phone-top">
+        <div class="avatar">C</div>
+        <div><b>Clínica Estética Belén</b><small>en línea</small></div>
+      </div>
+      <div class="chat" id="chat">
+        <div class="msg in">Hola! cuánto sale la limpieza facial? tienen para el sábado?<time>23:47</time></div>
+        <div class="msg out">¡Hola! 😊 La limpieza facial profunda sale $28.000 y dura 60 min. Este sábado tengo lugar a las 10:00 y a las 12:30. ¿Te reservo alguno?<time>23:47</time></div>
+        <div class="msg in">a las 10 porfa<time>23:48</time></div>
+        <div class="msg out">¡Listo! ✅ Te agendé el sábado a las 10:00. ¿Me pasás tu nombre completo? Te mando un recordatorio el viernes.<time>23:48</time></div>
+        <div class="msg in">Sofía Ramírez. genial gracias!!<time>23:48</time></div>
+        <div class="typing" id="typing"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="alt pain">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">El problema</span>
+      <h2 style="margin-top:14px">Cada mensaje que contestás tarde es un cliente que <span class="hl">se va con otro</span>.</h2>
+      <p>La gente escribe a 3 o 4 negocios a la vez y se queda con el primero que responde. Si estás atendiendo, cerrado o durmiendo, ese cliente ya es de otro.</p>
+    </div>
+    <div class="grid3">
+      <div class="card"><h3>"¿Precio?" × 40 por día</h3><p>Las mismas preguntas una y otra vez te comen horas que podrías usar en atender o vender.</p></div>
+      <div class="card"><h3>Mensajes de noche y finde</h3><p>Muchas consultas llegan fuera de horario. A la mañana siguiente ya nadie contesta.</p></div>
+      <div class="card"><h3>Turnos que se caen</h3><p>Sin recordatorios, la gente se olvida y te deja el hueco vacío en la agenda.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">IA sin humo</span>
+      <h2 style="margin-top:14px">Olvidate de los cursos. Esto es lo que la IA <span class="hl">hace de verdad</span> en un negocio como el tuyo.</h2>
+      <p>No es magia ni un robot que maneja tu empresa. Son tareas repetitivas que hoy hacés vos (o tu empleado) y que una IA bien configurada hace más rápido y sin cansarse.</p>
+    </div>
+    <div class="grid2">
+      <div class="card"><span class="num">✓ LO QUE SÍ HACE</span>
+        <ul class="list">
+          <li><span>Contestar las preguntas de siempre con <b>tu</b> información real.</span></li>
+          <li><span>Tomar datos, dar turnos y mandar recordatorios.</span></li>
+          <li><span>Ordenar tus contactos para que no se pierda ninguno.</span></li>
+          <li><span>Avisarte cuando un cliente necesita una persona.</span></li>
+        </ul>
+      </div>
+      <div class="card"><span class="num" style="color:var(--muted)">✕ LO QUE NO HACE</span>
+        <ul class="list" style="opacity:.75">
+          <li><span>Reemplazar tu atención en lo importante.</span></li>
+          <li><span>Inventar precios o prometer cosas que no ofrecés.</span></li>
+          <li><span>Traerte clientes de la nada: atiende mejor a los que ya te escriben.</span></li>
+          <li><span>Funcionar sin que nadie lo configure con tu negocio.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">Cómo funciona</span>
+      <h2 style="margin-top:14px">En una semana tenés tu asistente <span class="hl">trabajando</span>.</h2>
+    </div>
+    <div class="grid3">
+      <div class="card"><span class="num">01 / DEMO GRATIS</span><h3>Me pasás tu info</h3><p>Precios, servicios, horarios, preguntas frecuentes. En 24 hs te mando una demo para que la pruebes vos mismo.</p></div>
+      <div class="card"><span class="num">02 / ARMADO</span><h3>Lo ajustamos juntos</h3><p>Le damos el tono de tu negocio, lo conectamos a tu WhatsApp y a tu agenda. Vos no tocás nada técnico.</p></div>
+      <div class="card"><span class="num">03 / EN MARCHA</span><h3>Responde y agenda solo</h3><p>Atiende 24/7 y, cuando algo necesita una persona, te pasa la conversación al instante.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap grid2" style="margin-top:0;align-items:center">
+    <div>
+      <span class="tag">Qué incluye</span>
+      <h2 style="margin-top:14px">Lo básico que tu negocio necesita, <span class="hl">automatizado</span>.</h2>
+      <p class="muted" style="margin-top:16px;font-size:18px">Arrancamos por lo que más plata te hace perder y después sumamos lo que quieras.</p>
+    </div>
+    <ul class="list">
+      <li><span><b>Respuesta inmediata en WhatsApp e Instagram</b>, con la información real de tu negocio.</span></li>
+      <li><span><b>Agenda de turnos automática</b> y confirmación al cliente.</span></li>
+      <li><span><b>Recordatorios</b> el día anterior para que no falte nadie.</span></li>
+      <li><span><b>Planilla con todos tus contactos</b> (nombre, teléfono, qué consultó).</span></li>
+      <li><span><b>Pase a una persona</b> cuando el cliente lo necesita.</span></li>
+      <li><span><b>Mensajes para volver a traer</b> a clientes que hace tiempo no vienen.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">Hacé la cuenta</span>
+      <h2 style="margin-top:14px">¿Cuánta plata se te escapa por <span class="hl">no contestar a tiempo</span>?</h2>
+    </div>
+    <div class="calc">
+      <div class="card">
+        <div class="field"><label for="c1">Consultas por día <output id="o1">20</output></label><input id="c1" type="range" min="5" max="150" step="5" value="20"></div>
+        <div class="field"><label for="c2">% que contestás tarde o no contestás <output id="o2">30%</output></label><input id="c2" type="range" min="5" max="80" step="5" value="30"></div>
+        <div class="field"><label for="c3">De esas, % que te hubiera comprado <output id="o3">20%</output></label><input id="c3" type="range" min="5" max="60" step="5" value="20"></div>
+        <div class="field" style="margin-bottom:0"><label for="c4">Ticket promedio <output id="o4">$25.000</output></label><input id="c4" type="range" min="5000" max="300000" step="5000" value="25000"></div>
+      </div>
+      <div class="result">
+        <span class="tag">Plata que dejás pasar por mes</span>
+        <div class="big" id="res">$900.000</div>
+        <p class="muted" id="res2">≈ 36 clientes por mes que se van con otro.</p>
+        <small>Estimación simple: consultas × % sin responder × % que compraría × ticket × 30 días.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">Para quién es</span>
+      <h2 style="margin-top:14px">Ideal si recibís muchas consultas por <span class="hl">WhatsApp</span>.</h2>
+    </div>
+    <div class="chips">
+      <span class="chip">Clínicas estéticas</span><span class="chip">Odontólogos</span><span class="chip">Consultorios</span>
+      <span class="chip">Inmobiliarias</span><span class="chip">Gimnasios</span><span class="chip">Peluquerías y barberías</span>
+      <span class="chip">Centros de uñas y spa</span><span class="chip">Talleres</span><span class="chip">Restaurantes</span>
+      <span class="chip">Veterinarias</span><span class="chip">Escuelas e institutos</span><span class="chip">Comercios</span>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">Preguntas frecuentes</span>
+      <h2 style="margin-top:14px">Lo que todos preguntan</h2>
+    </div>
+    <div class="faq">
+      <details><summary>¿Tengo que cambiar mi número de WhatsApp?</summary><p>No. Lo conectamos a tu número de siempre. Tus clientes no notan ningún cambio, salvo que ahora les contestan al toque.</p></details>
+      <details><summary>¿Y si el cliente pregunta algo que el asistente no sabe?</summary><p>Le avisa que lo atiende una persona y te pasa la conversación. Nunca inventa precios ni información.</p></details>
+      <details><summary>¿Necesito saber de tecnología?</summary><p>Nada. Yo armo todo, lo conecto y te enseño en 15 minutos cómo ver las conversaciones y los turnos.</p></details>
+      <details><summary>¿Cuánto cuesta?</summary><p>Depende de lo que necesites conectar. En la llamada te paso un precio cerrado. La demo es gratis y sin compromiso: si no te sirve, no pagás nada.</p></details>
+      <details><summary>¿Va a sonar como un robot?</summary><p>No. Lo configuramos con el tono de tu negocio: cercano, formal o como hables vos. Probalo en la demo y decidí.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <div class="box">
+      <span class="tag">Demo gratis · sin compromiso</span>
+      <h2 style="margin-top:14px">Probá tu asistente <span class="hl">antes de pagar un peso</span>.</h2>
+      <p>Escribime por WhatsApp con el nombre de tu negocio y en 24 hs te mando la demo funcionando con tu información.</p>
+      <a class="btn btn-main js-wa" href="#">Quiero mi demo gratis</a>
+      <p style="margin:18px auto 0;font-size:15px" class="muted">¿Preferís hablar? <a href="../agenda/" class="hl" style="font-weight:700">Agendá una llamada de 15 min</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="y"></span> IAgentics Labs · Asistentes de IA y automatizaciones para negocios</footer>
+
+<div class="sticky"><a class="btn btn-main js-wa" href="#">Quiero mi demo gratis</a></div>
+
+<script>
+  /* ===== CONFIGURACIÓN ===== */
+  var WHATSAPP_NUMBER = '5490000000000'; // ← tu número con código de país, sin + ni espacios
+  var WHATSAPP_TEXT = 'Hola! Vi el anuncio y quiero la demo gratis del asistente de IA para mi negocio. Mi negocio es: ';
+  var META_PIXEL_ID = ''; // ← pegá acá el ID de tu pixel de Meta para medir los clics
+  var LANDING = 'locales';
+  /* ========================= */
+
+  if (META_PIXEL_ID) {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', META_PIXEL_ID); fbq('track', 'PageView');
+  }
+  var waUrl = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_TEXT);
+  document.querySelectorAll('.js-wa').forEach(function (a) {
+    a.href = waUrl; a.target = '_blank'; a.rel = 'noopener';
+    a.addEventListener('click', function () { if (window.fbq) fbq('track', 'Contact', { content_name: LANDING }); });
+  });
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // chat animation
+  (function () {
+    var msgs = document.querySelectorAll('#chat .msg'), typing = document.getElementById('typing');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { msgs.forEach(function (m) { m.classList.add('show'); }); return; }
+    function run() {
+      msgs.forEach(function (m) { m.classList.remove('show'); });
+      var t = 400;
+      msgs.forEach(function (m) {
+        var out = m.classList.contains('out');
+        if (out) { setTimeout(function () { typing.classList.add('show'); m.parentNode.insertBefore(typing, m); }, t); t += 1100; }
+        setTimeout(function () { typing.classList.remove('show'); m.classList.add('show'); }, t);
+        t += out ? 1300 : 1000;
+      });
+      setTimeout(run, t + 4000);
+    }
+    run();
+  })();
+
+  // calculator
+  (function () {
+    var f = new Intl.NumberFormat('es-AR');
+    function v(id) { return +document.getElementById(id).value; }
+    function calc() {
+      var a = v('c1'), b = v('c2'), c = v('c3'), d = v('c4');
+      document.getElementById('o1').textContent = a;
+      document.getElementById('o2').textContent = b + '%';
+      document.getElementById('o3').textContent = c + '%';
+      document.getElementById('o4').textContent = '$' + f.format(d);
+      var clients = Math.round(a * (b / 100) * (c / 100) * 30);
+      document.getElementById('res').textContent = '$' + f.format(clients * d);
+      document.getElementById('res2').textContent = '≈ ' + clients + ' clientes por mes que se van con otro.';
+    }
+    ['c1','c2','c3','c4'].forEach(function (id) { document.getElementById(id).addEventListener('input', calc); });
+    calc();
+  })();
+</script>
+</body>
+</html>
