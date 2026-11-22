@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico gratis | IAgentics Labs</title>
+<meta name="description" content="Respondé 5 preguntas y descubrí dónde se te escapan clientes y qué automatizaría la IA en tu negocio.">
+<meta property="og:title" content="¿Dónde se te escapan clientes? Diagnóstico gratis de 60 segundos">
+<meta property="og:description" content="Tu proceso de ventas, dónde perdés plata y qué automatizaríamos primero.">
+<meta name="theme-color" content="#141110">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root {
+    --bg: #141110; --bg2: #1C1816; --card: #221D1A; --line: #352E29;
+    --text: #F5F1EA; --muted: #A79C92; --soft: #C9BFB5;
+    --accent: #FF6A3D; --accent2: #FF835E; --ok: #3DDC84;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: Manrope, system-ui, sans-serif; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; line-height: 1.12; margin: 0; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(34px, 6vw, 58px); }
+  h2 { font-size: clamp(28px, 4.2vw, 42px); }
+  h3 { font-size: 20px; }
+  p { margin: 0; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .hl { color: var(--accent); }
+  section { padding: 84px 0; }
+  .muted { color: var(--muted); }
+
+  /* nav */
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(20,17,16,.86); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 19px; }
+  .logo span { color: var(--accent); }
+
+  /* buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 26px; border-radius: 12px; font-weight: 800; font-size: 16px; cursor: pointer; border: 0; transition: background .15s, transform .1s, border-color .15s; }
+  .btn:active { transform: scale(.98); }
+  .btn-main { background: var(--accent); color: #141110; }
+  .btn-main:hover { background: var(--accent2); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--text); background: transparent; }
+  .btn-ghost:hover { border-color: var(--accent); }
+  .btn-sm { padding: 10px 16px; font-size: 14px; border-radius: 10px; }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+
+  /* hero */
+  .hero { padding: 64px 0 80px; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+  .hero p.lead { font-size: 19px; color: var(--soft); margin: 22px 0 30px; max-width: 560px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .proof { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 26px; font-size: 14px; color: var(--muted); }
+  .proof b { color: var(--text); }
+  .proof div::before { content: "✓ "; color: var(--ok); font-weight: 800; }
+
+  /* phone */
+  .phone { background: #0B141A; border: 1px solid var(--line); border-radius: 28px; padding: 0; overflow: hidden; max-width: 380px; margin: 0 auto; box-shadow: 0 30px 80px -30px rgba(255,106,61,.35); }
+  .phone-top { background: #202C33; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; font-weight: 800; color: #141110; font-size: 15px; }
+  .phone-top b { display: block; font-size: 15px; }
+  .phone-top small { color: var(--ok); font-size: 12px; }
+  .chat { padding: 18px 14px; display: flex; flex-direction: column; gap: 10px; min-height: 380px; font-size: 14.5px; line-height: 1.45; }
+  .msg { max-width: 82%; padding: 9px 12px; border-radius: 10px; opacity: 0; transform: translateY(8px); transition: opacity .35s, transform .35s; }
+  .msg.show { opacity: 1; transform: none; }
+  .msg.in { background: #202C33; align-self: flex-start; border-top-left-radius: 2px; }
+  .msg.out { background: #005C4B; align-self: flex-end; border-top-right-radius: 2px; }
+  .msg time { display: block; text-align: right; font-size: 11px; color: rgba(255,255,255,.5); margin-top: 3px; }
+  .typing { align-self: flex-end; background: #005C4B; padding: 10px 14px; border-radius: 10px; display: none; gap: 4px; }
+  .typing.show { display: flex; }
+  .typing i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.7); animation: dot 1s infinite; }
+  .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+  @keyframes dot { 0%,60%,100% { opacity: .3; } 30% { opacity: 1; } }
+
+  /* cards */
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+  .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 44px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+  .card h3 { margin-bottom: 10px; }
+  .card p { color: var(--soft); font-size: 16px; }
+  .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-weight: 700; font-size: 14px; margin-bottom: 14px; display: block; }
+  .pain .card { border-left: 3px solid var(--accent); }
+  .section-head { max-width: 720px; }
+  .section-head p { color: var(--soft); margin-top: 16px; font-size: 18px; }
+  .alt { background: var(--bg2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  /* chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+  .chip { border: 1px solid var(--line); background: var(--card); padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: 15px; }
+
+  /* includes list */
+  .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .list li { display: flex; gap: 12px; align-items: flex-start; color: var(--soft); }
+  .list li::before { content: ""; flex: none; width: 22px; height: 22px; margin-top: 2px; border-radius: 6px; background: rgba(255,106,61,.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF6A3D' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/14px no-repeat; }
+  .list b { color: var(--text); }
+
+  /* calculator */
+  .calc { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 44px; align-items: stretch; }
+  .field { margin-bottom: 22px; }
+  .field label { display: flex; justify-content: space-between; font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+  .field label output { font-family: 'JetBrains Mono', monospace; color: var(--accent); }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .result { background: linear-gradient(160deg, rgba(255,106,61,.16), rgba(255,106,61,.03)); border: 1px solid rgba(255,106,61,.45); border-radius: 18px; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+  .big { font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 6vw, 60px); font-weight: 700; color: var(--accent); line-height: 1; margin: 12px 0; }
+  .result small { color: var(--muted); font-size: 13px; margin-top: 14px; display: block; }
+
+  /* faq */
+  .faq { margin-top: 40px; display: grid; gap: 12px; max-width: 820px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; }
+  summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 20px; line-height: 1; }
+  details[open] summary::after { content: "−"; }
+  details p { color: var(--soft); margin-top: 12px; font-size: 16px; }
+
+  /* final cta */
+  .final { text-align: center; }
+  .final .box { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 56px 24px; }
+  .final p { color: var(--soft); max-width: 560px; margin: 18px auto 30px; font-size: 18px; }
+  footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: 14px; text-align: center; }
+
+  /* sticky mobile cta */
+  .sticky { display: none; }
+
+  @media (max-width: 880px) {
+    .hero-grid, .calc { grid-template-columns: 1fr; gap: 40px; }
+    .grid3, .grid2 { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+    .hero { padding: 36px 0 60px; }
+    nav .btn { display: none; }
+    .sticky { display: block; position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: rgba(20,17,16,.95); border-top: 1px solid var(--line); z-index: 20; }
+    .sticky .btn { width: 100%; }
+    footer { padding-bottom: 100px; }
+  }
+  @media (max-width: 480px) { .ctas .btn { width: 100%; } }
+  @media (prefers-reduced-motion: reduce) { .msg { transition: none; } html { scroll-behavior: auto; } }
+</style>
+
+<style>
+  body { min-height: 100vh; }
+  .quiz { max-width: 760px; margin: 0 auto; padding: 36px 20px 120px; }
+  .bar { height: 4px; background: var(--line); border-radius: 4px; overflow: hidden; margin-bottom: 30px; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .35s ease; }
+  .step { display: none; }
+  .step.on { display: block; animation: fade .35s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .q-n { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .14em; color: var(--accent); text-transform: uppercase; }
+  .q-t { font-family: 'Space Grotesk', sans-serif; font-size: clamp(26px, 4.4vw, 38px); line-height: 1.15; margin: 10px 0 8px; letter-spacing: -.02em; }
+  .q-s { color: var(--muted); margin-bottom: 26px; }
+  .opts { display: grid; gap: 10px; }
+  .opts.g2 { grid-template-columns: repeat(2, 1fr); }
+  .opt { display: flex; align-items: center; gap: 12px; text-align: left; width: 100%; background: var(--card); border: 1px solid var(--line); color: var(--text); border-radius: 14px; padding: 16px 18px; font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; transition: border-color .15s, background .15s, transform .1s; }
+  .opt:hover { border-color: var(--accent); }
+  .opt:active { transform: scale(.99); }
+  .opt.sel { border-color: var(--accent); background: rgba(255,106,61,.12); }
+  .opt .e { font-size: 22px; width: 28px; text-align: center; flex: none; }
+  .back { background: none; border: 0; color: var(--muted); font: inherit; font-size: 15px; cursor: pointer; margin-top: 22px; padding: 6px 0; }
+  .back:hover { color: var(--text); }
+  .intro-list { list-style: none; padding: 0; margin: 26px 0 32px; display: grid; gap: 12px; }
+  .intro-list li { display: flex; gap: 12px; color: var(--soft); }
+  .intro-list li b { color: var(--text); }
+  .intro-list li span:first-child { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+
+  .form { display: grid; gap: 14px; margin-top: 8px; }
+  .form label { font-weight: 700; font-size: 14px; display: block; margin-bottom: 6px; }
+  .form input { width: 100%; background: var(--card); border: 1px solid var(--line); color: var(--text); border-radius: 12px; padding: 15px 16px; font: inherit; font-size: 16px; }
+  .form input:focus { outline: none; border-color: var(--accent); }
+  .err { color: #FF8A80; font-size: 14px; min-height: 20px; }
+  .fine { color: var(--muted); font-size: 13px; }
+
+  /* result */
+  .res-head { margin-bottom: 30px; }
+  .chips2 { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chips2 span { font-size: 13px; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; color: var(--soft); background: var(--card); }
+  .block { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 24px; margin-top: 18px; }
+  .block h3 { margin-bottom: 6px; }
+  .block > p { color: var(--soft); font-size: 16px; }
+  .stat { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .stat b { font-family: 'Space Grotesk', sans-serif; font-size: 44px; color: var(--accent); line-height: 1; }
+  .pipe { display: grid; gap: 10px; margin-top: 18px; }
+  .ps { display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; padding: 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg2); }
+  .ps .k { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; background: var(--line); color: var(--soft); }
+  .ps b { display: block; font-size: 16px; }
+  .ps .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 6px; font-size: 14px; }
+  .ps .hoy { color: var(--muted); }
+  .ps .hoy::before { content: "HOY · "; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .08em; }
+  .ps .ia { color: var(--ok); }
+  .ps .ia::before { content: "CON IA · "; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .08em; }
+  .ps.leak { border-color: var(--accent); background: rgba(255,106,61,.08); }
+  .ps.leak .k { background: var(--accent); color: #141110; }
+  .ps.leak .hoy { color: #FFB199; }
+  .leak-tag { display: inline-block; margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .08em; }
+  .video { position: relative; padding-top: 56.25%; border-radius: 14px; overflow: hidden; background: #000; margin-top: 14px; }
+  .video iframe, .video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .recs { display: grid; gap: 12px; margin-top: 16px; }
+  .rec { display: grid; grid-template-columns: auto 1fr; gap: 14px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg2); }
+  .rec .n { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent); }
+  .rec b { display: block; }
+  .rec p { color: var(--soft); font-size: 15px; margin-top: 4px; }
+  .rec.top { border-color: var(--accent); }
+  .trust { border-left: 3px solid var(--ok); }
+
+  .days { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-top: 16px; scrollbar-width: thin; }
+  .day, .time { flex: none; background: var(--bg2); border: 1px solid var(--line); color: var(--text); border-radius: 12px; font: inherit; cursor: pointer; transition: border-color .15s, background .15s; }
+  .day { padding: 10px 12px; min-width: 66px; text-align: center; font-size: 13px; }
+  .day b { display: block; font-size: 20px; font-family: 'Space Grotesk', sans-serif; }
+  .times { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; margin-top: 14px; }
+  .time { padding: 12px; font-weight: 700; }
+  .day:hover, .time:hover { border-color: var(--accent); }
+  .day.sel, .time.sel { border-color: var(--accent); background: rgba(255,106,61,.15); }
+  .done { text-align: center; padding: 40px 24px; }
+  .done .big { font-size: 56px; margin: 0 0 10px; }
+
+  @media (max-width: 600px) {
+    .opts.g2 { grid-template-columns: 1fr; }
+    .ps .row { grid-template-columns: 1fr; gap: 4px; }
+    .quiz { padding-top: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="../" class="logo">IAgentics<span>.</span>Labs</a>
+    <span class="tag" style="font-size:11px">Diagnóstico gratis</span>
+  </div>
+</nav>
+
+<main class="quiz">
+  <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+
+  <!-- INTRO -->
+  <div class="step on" data-s="intro">
+    <span class="q-n">Diagnóstico gratis · 60 segundos</span>
+    <h1 class="q-t" id="intro-t">Descubrí dónde se te escapan clientes y qué haría la IA en <span class="hl">tu</span> negocio.</h1>
+    <p class="q-s">Nada de humo ni bots genéricos que inventan precios. Respondé 5 preguntas y te muestro tu proceso de ventas, dónde perdés plata y qué automatizaríamos primero.</p>
+    <ul class="intro-list">
+      <li><span>01</span><span><b>Tu proceso de ventas</b> paso a paso, hoy y con automatización.</span></li>
+      <li><span>02</span><span><b>Dónde se pierden clientes</b> según tus respuestas.</span></li>
+      <li><span>03</span><span><b>Un video de tu rubro</b> y una llamada de 15 min para verlo aplicado a vos.</span></li>
+    </ul>
+    <button class="btn btn-main" id="start">Empezar el diagnóstico →</button>
+  </div>
+
+  <!-- Q1 rubro -->
+  <div class="step" data-s="rubro">
+    <span class="q-n">Pregunta 1 de 5</span>
+    <h2 class="q-t">¿Qué tipo de negocio tenés?</h2>
+    <p class="q-s">Elegí el más parecido.</p>
+    <div class="opts g2" id="o-rubro"></div>
+    <button class="back">← Volver</button>
+  </div>
+
+  <div class="step" data-s="canal">
+    <span class="q-n">Pregunta 2 de 5</span>
+    <h2 class="q-t">¿Por dónde te llegan la mayoría de los clientes?</h2>
+    <div class="opts" data-k="canal">
+      <button class="opt" data-v="WhatsApp"><span class="e">💬</span>WhatsApp</button>
+      <button class="opt" data-v="Instagram"><span class="e">📸</span>Instagram / Facebook</button>
+      <button class="opt" data-v="Llamadas"><span class="e">📞</span>Llamadas</button>
+      <button class="opt" data-v="Anuncios o web"><span class="e">📣</span>Anuncios o mi página web</button>
+      <button class="opt" data-v="Recomendación"><span class="e">🤝</span>Recomendación / pasan por el local</button>
+    </div>
+    <button class="back">← Volver</button>
+  </div>
+
+  <div class="step" data-s="volumen">
+    <span class="q-n">Pregunta 3 de 5</span>
+    <h2 class="q-t">¿Cuántas consultas recibís por día, más o menos?</h2>
+    <div class="opts g2" data-k="volumen">
+      <button class="opt" data-v="Menos de 10" data-n="6">Menos de 10</button>
+      <button class="opt" data-v="10 a 30" data-n="20">10 a 30</button>
+      <button class="opt" data-v="30 a 80" data-n="50">30 a 80</button>
+      <button class="opt" data-v="Más de 80" data-n="100">Más de 80</button>
+    </div>
+    <button class="back">← Volver</button>
+  </div>
+
+  <div class="step" data-s="quien">
+    <span class="q-n">Pregunta 4 de 5</span>
+    <h2 class="q-t">¿Quién responde los mensajes hoy?</h2>
+    <div class="opts" data-k="quien">
+      <button class="opt" data-v="Yo mismo" data-n="0.35"><span class="e">🙋</span>Yo mismo, cuando puedo</button>
+      <button class="opt" data-v="Un empleado" data-n="0.2"><span class="e">🧑‍💼</span>Un empleado o recepcionista</button>
+      <button class="opt" data-v="Varias personas" data-n="0.15"><span class="e">👥</span>Varias personas del equipo</button>
+      <button class="opt" data-v="Un bot que no funciona" data-n="0.4"><span class="e">🤖</span>Probé un bot y no funcionó bien</button>
+      <button class="opt" data-v="Nadie a tiempo" data-n="0.5"><span class="e">😅</span>La verdad, nadie llega a tiempo</button>
+    </div>
+    <button class="back">← Volver</button>
+  </div>
+
+  <div class="step" data-s="dolor">
+    <span class="q-n">Pregunta 5 de 5</span>
+    <h2 class="q-t">¿Qué es lo que más te duele hoy?</h2>
+    <div class="opts" data-k="dolor">
+      <button class="opt" data-v="tarde"><span class="e">⏱️</span>Contesto tarde y los clientes se van con otro</button>
+      <button class="opt" data-v="repetidas"><span class="e">🔁</span>Pierdo horas respondiendo siempre lo mismo</button>
+      <button class="opt" data-v="turnos"><span class="e">📅</span>Turnos, citas o reuniones que se caen</button>
+      <button class="opt" data-v="seguimiento"><span class="e">📭</span>No hago seguimiento y se enfrían</button>
+      <button class="opt" data-v="desorden"><span class="e">🗂️</span>Todo a mano, sin orden, no sé mis números</button>
+    </div>
+    <button class="back">← Volver</button>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="step" data-s="contacto">
+    <span class="q-n">Último paso</span>
+    <h2 class="q-t">¿A nombre de quién preparo el diagnóstico?</h2>
+    <p class="q-s">Lo ves ahora mismo en la pantalla. El WhatsApp es solo para confirmarte la llamada si la agendás.</p>
+    <form class="form" id="f-contacto" novalidate>
+      <div><label for="f-nombre">Tu nombre</label><input id="f-nombre" autocomplete="given-name" required></div>
+      <div><label for="f-negocio">Nombre de tu negocio</label><input id="f-negocio" autocomplete="organization" required></div>
+      <div><label for="f-wa">WhatsApp (con código de área)</label><input id="f-wa" type="tel" autocomplete="tel" inputmode="tel" placeholder="Ej: 11 2345 6789" required></div>
+      <p class="err" id="f-err" role="alert"></p>
+      <button class="btn btn-main" type="submit">Ver mi diagnóstico →</button>
+      <p class="fine">No compartimos tus datos. Cero spam.</p>
+    </form>
+    <button class="back">← Volver</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="step" data-s="resultado" id="resultado"></div>
+</main>
+
+<script src="../assets/rubros.js"></script>
+<script>
+  /* ===== CONFIGURACIÓN ===== */
+  var CONFIG = {
+    whatsapp: '5490000000000',                 // ← tu número con código de país, sin + ni espacios
+    web3formsKey: 'TU_ACCESS_KEY_DE_WEB3FORMS', // ← la misma clave que usa /agenda/ (te llegan los leads y las reservas por email)
+    metaPixelId: '',                            // ← ID de tu pixel de Meta
+    tz: 'America/Argentina/Buenos_Aires',
+    diasAdelante: 10,
+    diasSemana: [1, 2, 3, 4, 5],                // 0=dom ... 6=sáb
+    horarios: ['10:00', '11:00', '12:00', '15:00', '16:00', '17:00']
+  };
+  /* Videos por rubro: pegá el link de YouTube, Vimeo o un .mp4.
+     Si un rubro no tiene video, se usa "general"; si tampoco hay, el bloque no se muestra. */
+  var VIDEOS = {
+    general: '',
+    clinicas: '', odontologos: '', inmobiliarias: '', gimnasios: '', peluquerias: '', restaurantes: '',
+    talleres: '', coaches: '', infoproductos: '', tiendas: '', agencias: '', profesionales: ''
+  };
+  /* ========================= */
+
+  var OTRO = { id: 'otro', tipo: 'local', ico: '✨', nombre: 'Otro tipo de negocio',
+    pasos: ['Te consultan', 'Respuesta', 'Turno, pedido o presupuesto', 'Confirmación', 'Seguimiento y recompra'],
+    autos: [
+      ['Respuesta inmediata con IA', 'b', 'Contesta las consultas al instante con la información real de tu negocio.', ''],
+      ['Agenda, pedidos o presupuestos', 'b', 'Toma los datos y deja el turno, pedido o presupuesto listo.', ''],
+      ['Seguimiento automático', 'i', 'Les vuelve a escribir a los que no respondieron.', ''],
+      ['Reactivación de clientes', 'i', 'Les escribe a clientes viejos con una propuesta para que vuelvan.', '']
+    ] };
+  var ALL = RUBROS.concat([OTRO]);
+
+  var HOY = ['Llega por {canal} y queda en la lista de chats', 'Respondés cuando podés, a veces horas después', 'Se coordina a mano, ida y vuelta de mensajes', 'Si se olvidan, nadie se entera hasta que es tarde', 'No se les vuelve a escribir: se pierden'];
+  var IA  = ['Se registra solo con nombre y lo que busca', 'Respuesta en segundos con tu info real (nunca inventa precios)', 'La IA lo resuelve y lo deja agendado o listo', 'Confirmación y recordatorio automáticos', 'Seguimiento y reactivación automáticos'];
+  var DOLOR = {
+    tarde:       { paso: 1, t: 'Respuesta inmediata 24/7', d: 'Cada consulta se responde en segundos, de día, de noche y el fin de semana, con la información real de tu negocio.', txt: 'contestar tarde' },
+    repetidas:   { paso: 1, t: 'Preguntas frecuentes en automático', d: 'Precios, horarios, ubicación, formas de pago: la IA los contesta y vos solo atendés lo que necesita una persona.', txt: 'responder siempre lo mismo' },
+    turnos:      { paso: 3, t: 'Confirmaciones y recordatorios', d: 'Confirmación al reservar y recordatorio antes, con opción de reprogramar. Los huecos se ofrecen a otros.', txt: 'turnos que se caen' },
+    seguimiento: { paso: 4, t: 'Seguimiento automático', d: 'Los que no respondieron o "lo piensan" reciben un segundo y tercer mensaje en el momento justo.', txt: 'falta de seguimiento' },
+    desorden:    { paso: 2, t: 'Todo en un solo lugar', d: 'Cada cliente queda anotado con qué pidió y en qué etapa está, y recibís un resumen con tus números.', txt: 'trabajar todo a mano' }
+  };
+
+  var A = {}; // respuestas
+  var ORDER = ['intro', 'rubro', 'canal', 'volumen', 'quien', 'dolor', 'contacto', 'resultado'];
+  var hist = [];
+  var params = new URLSearchParams(location.search);
+
+  /* pixel */
+  if (CONFIG.metaPixelId) {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', CONFIG.metaPixelId); fbq('track', 'PageView');
+  }
+  function track(ev, p, custom) { if (window.fbq) fbq(custom ? 'trackCustom' : 'track', ev, p || {}); }
+  function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
+  function send(subject, data) {
+    if (!CONFIG.web3formsKey || CONFIG.web3formsKey.indexOf('TU_') === 0) return Promise.resolve(false);
+    data.access_key = CONFIG.web3formsKey; data.subject = subject; data.from_name = 'Diagnóstico IAgentics Labs';
+    return fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) })
+      .then(function (r) { return r.json(); }).then(function (j) { return !!j.success; }).catch(function () { return false; });
+  }
+
+  /* navegación */
+  function show(name, push) {
+    if (push !== false) hist.push(name);
+    document.querySelectorAll('.step').forEach(function (s) { s.classList.toggle('on', s.dataset.s === name); });
+    var i = ORDER.indexOf(name);
+    document.getElementById('bar').style.width = Math.round(i / (ORDER.length - 1) * 100) + '%';
+    window.scrollTo(0, 0);
+  }
+  function next(from) {
+    var i = ORDER.indexOf(from) + 1;
+    if (ORDER[i] === 'rubro' && A.rubro) i++;
+    show(ORDER[i]);
+  }
+  document.querySelectorAll('.back').forEach(function (b) {
+    b.addEventListener('click', function () { hist.pop(); show(hist[hist.length - 1] || 'intro', false); });
+  });
+
+  /* rubro preseleccionado desde el anuncio */
+  var pre = ALL.find(function (r) { return r.id === params.get('rubro'); });
+  if (pre) {
+    A.rubro = pre;
+    document.getElementById('intro-t').innerHTML = 'Descubrí dónde se te escapan clientes y qué haría la IA en tu <span class="hl">' + esc(pre.nombre.toLowerCase()) + '</span>.';
+  }
+  hist.push('intro');
+  document.getElementById('start').addEventListener('click', function () { track('QuizStart', { rubro: A.rubro ? A.rubro.id : '' }, true); next('intro'); });
+
+  /* opciones */
+  document.getElementById('o-rubro').innerHTML = ALL.map(function (r) {
+    return '<button class="opt" data-id="' + r.id + '"><span class="e">' + r.ico + '</span>' + esc(r.nombre) + '</button>';
+  }).join('');
+  document.getElementById('o-rubro').addEventListener('click', function (e) {
+    var b = e.target.closest('.opt'); if (!b) return;
+    A.rubro = ALL.find(function (r) { return r.id === b.dataset.id; });
+    mark(this, b); setTimeout(function () { next('rubro'); }, 180);
+  });
+  document.querySelectorAll('.opts[data-k]').forEach(function (box) {
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('.opt'); if (!b) return;
+      A[box.dataset.k] = { v: b.dataset.v, n: b.dataset.n ? +b.dataset.n : null, label: b.textContent.trim() };
+      mark(box, b);
+      var step = box.closest('.step').dataset.s;
+      setTimeout(function () { next(step); }, 180);
+    });
+  });
+  function mark(box, b) { box.querySelectorAll('.opt').forEach(function (o) { o.classList.toggle('sel', o === b); }); }
+
+  /* contacto */
+  document.getElementById('f-contacto').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var n = document.getElementById('f-nombre').value.trim(), g = document.getElementById('f-negocio').value.trim(), w = document.getElementById('f-wa').value.trim();
+    var err = document.getElementById('f-err');
+    if (!n || !g) { err.textContent = 'Completá tu nombre y el de tu negocio.'; return; }
+    if (w.replace(/\D/g, '').length < 8) { err.textContent = 'Revisá el WhatsApp: faltan números.'; return; }
+    err.textContent = '';
+    A.nombre = n; A.negocio = g; A.wa = w;
+    track('Lead', { content_name: A.rubro.id, content_category: A.dolor.v });
+    send('Nuevo diagnóstico: ' + g + ' (' + A.rubro.nombre + ')', resumen());
+    renderResultado(); show('resultado');
+  });
+
+  function resumen() {
+    return { nombre: A.nombre, negocio: A.negocio, whatsapp: A.wa, rubro: A.rubro.nombre, canal: A.canal.v,
+             consultas_por_dia: A.volumen.v, quien_responde: A.quien.v, mayor_dolor: DOLOR[A.dolor.v].txt,
+             origen: params.get('utm_campaign') || params.get('rubro') || 'directo' };
+  }
+
+  function videoHtml(url) {
+    if (!url) return '';
+    var yt = url.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/), vm = url.match(/vimeo\.com\/(\d+)/);
+    if (yt) return '<div class="video"><iframe src="https://www.youtube.com/embed/' + yt[1] + '?rel=0" title="Video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>';
+    if (vm) return '<div class="video"><iframe src="https://player.vimeo.com/video/' + vm[1] + '" title="Video" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>';
+    return '<div class="video"><video src="' + esc(url) + '" controls playsinline preload="metadata"></video></div>';
+  }
+
+  function renderResultado() {
+    var r = A.rubro, d = DOLOR[A.dolor.v];
+    var perdidas = Math.max(1, Math.round(A.volumen.n * A.quien.n * 7));
+    var pasos = r.pasos.map(function (p, i) {
+      var leak = i === d.paso;
+      return '<div class="ps' + (leak ? ' leak' : '') + '"><span class="k">' + (i + 1) + '</span><div><b>' + esc(p) + (leak ? '<span class="leak-tag">← ACÁ SE TE ESCAPAN</span>' : '') + '</b>' +
+        '<div class="row"><span class="hoy">' + esc(HOY[i].replace('{canal}', A.canal.v)) + '</span><span class="ia">' + esc(IA[i]) + '</span></div></div></div>';
+    }).join('');
+    var recs = '<div class="rec top"><span class="n">#1</span><div><b>' + esc(d.t) + '</b><p>' + esc(d.d) + '</p></div></div>' +
+      r.autos.slice(0, 3).map(function (a, i) { return '<div class="rec"><span class="n">#' + (i + 2) + '</span><div><b>' + esc(a[0]) + '</b><p>' + esc(a[2]) + '</p></div></div>'; }).join('');
+    var vid = videoHtml(VIDEOS[r.id] || VIDEOS.general);
+    var botNote = A.quien.v === 'Un bot que no funciona'
+      ? 'Los bots genéricos fallan porque <b>no conocen tu negocio</b>: inventan precios y responden cualquier cosa. '
+      : '';
+
+    document.getElementById('resultado').innerHTML =
+      '<div class="res-head"><span class="q-n">Diagnóstico de ' + esc(A.negocio) + '</span>' +
+      '<h2 class="q-t">' + esc(A.nombre) + ', tu mayor fuga está en <span class="hl">' + esc(r.pasos[d.paso].toLowerCase()) + '</span>.</h2>' +
+      '<div class="chips2"><span>' + r.ico + ' ' + esc(r.nombre) + '</span><span>' + esc(A.canal.v) + '</span><span>' + esc(A.volumen.v) + ' consultas/día</span><span>Responde: ' + esc(A.quien.v.toLowerCase()) + '</span></div></div>' +
+
+      '<div class="block"><h3>Lo que estimamos</h3><div class="stat"><b>~' + perdidas + '</b><span class="muted">consultas por semana que no reciben respuesta a tiempo</span></div>' +
+      '<p style="margin-top:10px;font-size:14px" class="muted">Estimación según tu volumen y quién responde hoy. En la llamada lo vemos con tus números reales.</p></div>' +
+
+      (vid ? '<div class="block"><h3>Mirá cómo se ve en ' + esc(r.nombre.toLowerCase()) + '</h3><p>Un ejemplo real del proceso automatizado, paso a paso.</p>' + vid + '</div>' : '') +
+
+      '<div class="block"><h3>Tu proceso de ventas, hoy vs. automatizado</h3><p>Estos son los 5 pasos por los que pasa cada cliente en tu negocio.</p><div class="pipe">' + pasos + '</div></div>' +
+
+      '<div class="block"><h3>Lo que automatizaríamos primero</h3><p>Ordenado por lo que más plata te devuelve, empezando por tu problema principal.</p><div class="recs">' + recs + '</div></div>' +
+
+      '<div class="block trust"><h3>Por qué esto no es "otro bot más"</h3><p>' + botNote + 'El tuyo se arma con <b>tu</b> información: precios, horarios y servicios reales. Si no sabe algo, no inventa: te pasa la conversación a vos. Y lo ajustamos juntos hasta que responda como responderías vos.</p></div>' +
+
+      '<div class="block" id="agendar"><h3>Agendá tu llamada de 15 minutos</h3><p>Vemos tu diagnóstico, te muestro la automatización aplicada a ' + esc(A.negocio) + ' y te paso un precio cerrado. Sin compromiso.</p>' +
+      '<div class="days" id="days"></div><div class="times" id="times"></div>' +
+      '<p class="err" id="b-err" role="alert" style="margin-top:12px"></p>' +
+      '<button class="btn btn-main" id="b-ok" disabled style="margin-top:6px;width:100%">Confirmar llamada</button>' +
+      '<p class="fine" style="margin-top:12px;text-align:center">¿Preferís escribir? <a class="hl" style="font-weight:700" target="_blank" rel="noopener" href="' + waUrl('Hola! Hice el diagnóstico de ' + A.negocio + ' (' + r.nombre + ') y quiero hablar.') + '">Escribime por WhatsApp</a></p></div>';
+    track('ViewContent', { content_name: r.id, content_type: 'diagnostico' });
+    renderBooking();
+  }
+
+  function waUrl(t) { return 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(t); }
+
+  /* agenda */
+  var sel = { day: null, time: null };
+  function renderBooking() {
+    var days = [], d = new Date(); d.setHours(0, 0, 0, 0);
+    while (days.length < CONFIG.diasAdelante) { d.setDate(d.getDate() + 1); if (CONFIG.diasSemana.indexOf(d.getDay()) > -1) days.push(new Date(d)); }
+    var dn = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'], mn = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+    var box = document.getElementById('days');
+    box.innerHTML = days.map(function (x, i) { return '<button class="day" data-i="' + i + '">' + dn[x.getDay()] + '<b>' + x.getDate() + '</b>' + mn[x.getMonth()] + '</button>'; }).join('');
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('.day'); if (!b) return;
+      sel.day = days[+b.dataset.i]; sel.time = null; mark2(box, b, '.day');
+      document.getElementById('times').innerHTML = CONFIG.horarios.map(function (t) { return '<button class="time">' + t + '</button>'; }).join('');
+      upd();
+    });
+    document.getElementById('times').addEventListener('click', function (e) {
+      var b = e.target.closest('.time'); if (!b) return;
+      sel.time = b.textContent; mark2(this, b, '.time'); upd();
+    });
+    document.getElementById('b-ok').addEventListener('click', confirmar);
+  }
+  function mark2(box, b, q) { box.querySelectorAll(q).forEach(function (o) { o.classList.toggle('sel', o === b); }); }
+  function upd() { document.getElementById('b-ok').disabled = !(sel.day && sel.time); }
+  function fecha() { return sel.day.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' }) + ' a las ' + sel.time + ' (hora Argentina)'; }
+
+  function confirmar() {
+    var btn = document.getElementById('b-ok'); btn.disabled = true; btn.textContent = 'Confirmando…';
+    var data = resumen(); data.llamada = fecha();
+    send('Llamada agendada: ' + A.negocio + ' · ' + fecha(), data).then(function (ok) {
+      track('Schedule', { content_name: A.rubro.id });
+      var msg = 'Hola! Soy ' + A.nombre + ' de ' + A.negocio + '. Agendé la llamada para el ' + fecha() + '.';
+      document.getElementById('agendar').innerHTML =
+        '<div class="done"><p class="big">✅</p><h3>¡Listo, ' + esc(A.nombre) + '! Nos vemos el ' + esc(fecha()) + '.</h3>' +
+        '<p style="margin:12px auto 22px;max-width:460px">' + (ok ? 'Te escribo por WhatsApp para confirmarte el link de la llamada.' : 'Tocá el botón para confirmarme por WhatsApp y te paso el link de la llamada.') + '</p>' +
+        '<a class="btn btn-' + (ok ? 'ghost' : 'main') + '" target="_blank" rel="noopener" href="' + waUrl(msg) + '">' + (ok ? 'Escribirme por WhatsApp' : 'Confirmar por WhatsApp') + '</a></div>';
+    });
+  }
+</script>
+</body>
+</html>
