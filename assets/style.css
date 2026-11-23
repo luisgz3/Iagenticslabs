@@ -104,8 +104,8 @@ h1{
 .hero-illustration{ width:100%; max-width:380px; justify-self:center; filter: drop-shadow(0 0 40px rgba(var(--rgb),.22)); }
 @media (max-width:860px){ .lib-hero{ grid-template-columns:1fr; } .hero-illustration{ display:none; } }
 
-.cta-row{ text-align:center; margin-top: 28px; }
-.lib-hero .cta-row{ text-align:left; }
+.cta-row{ text-align:center; margin-top: 28px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+.lib-hero .cta-row{ text-align:left; justify-content:flex-start; }
 
 /* ---------- plain centered hero (servicio page) ---------- */
 .hero{ padding: 72px 0 56px; text-align:center; }
