@@ -15,10 +15,11 @@
 <nav class="site-nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">IAgentics Labs</a>
-    <div class="nav-links">
-      <a href="index.html">Blog</a>
-      <a href="servicio.html" class="on">Servicio</a>
-    </div>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-menu">
+    <a href="index.html">Blog</a>
+    <a href="servicio.html">Servicio</a>
   </div>
 </nav>
 
@@ -411,7 +412,7 @@
 
 <footer>
   <div class="wrap">
-    <div class="footer-brand">IAgentics Labs — hecho con mucho <span class="heart">🧡</span></div>
+    <div class="footer-brand">Hecho con amor por IAgentics Labs</div>
     <p class="footer-tagline">Ayudamos a negocios a ganar más tiempo y dinero delegando tareas a Agentes IA.</p>
     <div class="footer-links">
       <a href="index.html">Blog</a>
@@ -420,6 +421,16 @@
     <p class="footer-disclaimer">Este sitio no pertenece a Facebook, Instagram, ni a Meta Platforms, Inc. de ninguna manera. FACEBOOK e INSTAGRAM son marcas registradas de Meta Platforms, Inc.</p>
   </div>
 </footer>
+
+<script>
+document.querySelectorAll('.nav-toggle').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    btn.closest('.site-nav').classList.toggle('open');
+  });
+});
+</script>
 
 </body>
 </html>
