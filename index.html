@@ -3,84 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IAgentics Labs — Biblioteca de guías sobre IA para negocios</title>
-<meta name="description" content="Guías simples y directas sobre IA aplicada a negocios reales: niveles de madurez, errores comunes, y por qué conviene empezar antes.">
-<meta name="theme-color" content="#121110">
+<title>IAgentics Labs</title>
+<meta name="description" content="IA aplicada a negocios reales.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<canvas id="net" aria-hidden="true"></canvas>
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="index.html">IAgentics<b> Labs</b></a>
+    <a href="index.html" class="nav-logo">IAgentics Labs</a>
     <div class="nav-links">
-      <a href="index.html" class="on">Biblioteca</a>
+      <a href="index.html" class="on">Blog</a>
       <a href="servicio.html">Servicio</a>
     </div>
-    <a class="nav-cta" href="https://wa.me/5491125545369?text=Hola%2C%20quiero%20info%20sobre%20instalar%20el%20sistema%20en%20mi%20negocio" target="_blank" rel="noopener">Agendar auditoría gratis</a>
   </div>
 </nav>
 
-<main class="wrap">
-  <section class="lib-hero">
-    <div>
-      <div class="crumb"><span>⌂</span><span>›</span><b>Biblioteca</b></div>
-      <h1>Lo que nadie te dice sobre aplicar Inteligencia Artificial en tu negocio.</h1>
-      <p class="hero-sub">Escribo sobre lo que veo auditando negocios que quieren meter IA de verdad — sin humo, sin vender una herramienta mágica. Si tenés un negocio con volumen, empezá por la clase gratis.</p>
-      <div class="cta-row">
-        <a href="https://wa.me/5491125545369?text=Hola%2C%20quiero%20la%20clase%20gratis%20sobre%20IA%20para%20mi%20negocio" class="btn" target="_blank" rel="noopener">
-          <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A8.9 8.9 0 0 0 3.1 16.9L2 21l4.2-1.1a8.9 8.9 0 0 0 12.8-8A8.9 8.9 0 0 0 17.6 6.3ZM12 19.5a7.5 7.5 0 0 1-3.8-1l-.3-.2-2.5.7.7-2.4-.2-.3a7.5 7.5 0 1 1 6.1 3.2Zm4.1-5.6c-.2-.1-1.3-.7-1.5-.7-.2-.1-.4-.1-.5.1s-.6.7-.7.9-.3.2-.5.1a6.1 6.1 0 0 1-1.8-1.1 6.8 6.8 0 0 1-1.3-1.6c-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4a.5.5 0 0 0 0-.5c-.1-.1-.5-1.3-.7-1.7s-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.7 2.7 0 0 0-.8 2 4.7 4.7 0 0 0 1 2.5 10.8 10.8 0 0 0 4.1 3.6c.6.2 1 .4 1.4.5a3.3 3.3 0 0 0 1.5.1 2.5 2.5 0 0 0 1.6-1.1 1.8 1.8 0 0 0 .1-1.1c-.1-.1-.2-.2-.4-.3Z"/></svg>
-          Quiero la clase gratis
-        </a>
-        <a href="servicio.html" class="btn btn-outline">Ver el servicio</a>
-      </div>
-    </div>
-    <svg class="hero-illustration" viewBox="0 0 400 300" fill="none" aria-hidden="true">
-      <rect x="20" y="30" width="360" height="230" rx="16" stroke="#443e36" stroke-width="2" fill="rgba(28,25,22,.6)"/>
-      <rect x="40" y="226" width="320" height="8" rx="3" fill="#443e36"/>
-      <g stroke="#121110" stroke-width="2">
-        <rect x="58"  y="104" width="30" height="122" rx="3" fill="#7c3a14"/>
-        <rect x="94"  y="70"  width="26" height="156" rx="3" fill="#3a3a44"/>
-        <rect x="126" y="92"  width="34" height="134" rx="3" fill="#ff5a1f"/>
-        <rect x="166" y="118" width="28" height="108" rx="3" fill="#9a4a1c"/>
-        <rect x="200" y="62"  width="30" height="164" rx="3" fill="#2d2d36"/>
-        <rect x="236" y="100" width="32" height="126" rx="3" fill="#c43d0e"/>
-        <rect x="274" y="80"  width="26" height="146" rx="3" fill="#4a4a55"/>
-        <rect x="306" y="112" width="34" height="114" rx="3" fill="#ff7a3d"/>
-      </g>
-      <g fill="#ffb020"><rect x="132" y="112" width="22" height="3" rx="1"/><rect x="132" y="120" width="22" height="3" rx="1"/><circle cx="352" cy="52" r="3"/><circle cx="48" cy="60" r="2"/></g>
-    </svg>
-  </section>
-
-  <div class="lib-bar">
-    <div><h2>Guías activas</h2><div class="lib-count" id="count"></div></div>
-    <div>
-      <label class="lib-search">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="q" type="search" placeholder="Buscar guías…" aria-label="Buscar guías">
-      </label>
+<section class="hero">
+  <div class="wrap">
+    <div class="tag">// EDITAR ACÁ: título principal</div>
+    <h1>[ TÍTULO ]</h1>
+    <p class="hero-sub">[ Subtítulo de una o dos líneas. ]</p>
+    <div class="cta-row">
+      <a href="https://wa.me/5491125545369" class="btn" target="_blank" rel="noopener">[ Botón CTA ]</a>
     </div>
   </div>
-  <div class="lib-pills" id="pills"></div>
-  <div class="lib-grid" id="grid"></div>
-</main>
+</section>
 
-<footer><div class="wrap">IAgentics Labs — hecho con mucho 🧡</div></footer>
-<a class="float-cta" href="https://wa.me/5491125545369?text=Hola%2C%20quiero%20info%20sobre%20instalar%20el%20sistema%20en%20mi%20negocio" target="_blank" rel="noopener"><i></i>Agendá tu auditoría gratis</a>
+<section class="pains" style="padding-bottom:70px;">
+  <div class="wrap">
+    <div class="essay-list">
+      <a href="blog/niveles-de-ia.html" class="essay-item">
+        <div class="essay-meta">Guía — 6 min de lectura</div>
+        <div class="essay-title">Los niveles de la IA: de tipear en ChatGPT a tener un Sistema Agéntico</div>
+        <p class="essay-excerpt">Un mapa simple con 5 niveles para saber en qué nivel está tu negocio hoy, y qué sigue después.</p>
+        <div class="essay-read">Leer →</div>
+      </a>
+      <a href="blog/lo-que-nadie-te-dice.html" class="essay-item">
+        <div class="essay-meta">Guía — 7 min de lectura</div>
+        <div class="essay-title">Lo que nadie te dice antes de meter IA en tu negocio</div>
+        <p class="essay-excerpt">Las cosas que descubrís recién cuando ya gastaste tiempo y plata — contadas antes de que te pasen a vos.</p>
+        <div class="essay-read">Leer →</div>
+      </a>
+      <a href="blog/empezar-cuanto-antes.html" class="essay-item">
+        <div class="essay-meta">Estrategia — 5 min de lectura</div>
+        <div class="essay-title">Por qué cuanto antes metas un agente, más rápido te conoce</div>
+        <p class="essay-excerpt">Un Sistema Agéntico mejora con el tiempo que lleva operando tu negocio. Empezar tarde tiene un costo que no se ve.</p>
+        <div class="essay-read">Leer →</div>
+      </a>
+    </div>
+  </div>
+</section>
 
-<script src="assets/site.js"></script>
-<script>
-  var GUIAS = [
-    { meta:"Guía", nivel:"Principiante", titulo:"Guía para aplicar IA en tu negocio · los niveles, de ChatGPT a un Sistema Agéntico", desc:"Un mapa simple con 5 niveles para saber en qué nivel está tu negocio hoy, y qué sigue después.", tags:["ia","niveles","fundamentos"], link:"blog/niveles-de-ia.html" },
-    { meta:"Guía", nivel:"Intermedio", titulo:"Lo que nadie te dice antes de meter IA en tu negocio", desc:"Las cosas que descubrís recién cuando ya gastaste tiempo y plata — contadas antes de que te pasen a vos.", tags:["negocio","implementacion","errores"], link:"blog/lo-que-nadie-te-dice.html" },
-    { meta:"Estrategia", nivel:"Avanzado", titulo:"Por qué cuanto antes metas un agente, más rápido te conoce", desc:"Un Sistema Agéntico mejora con el tiempo que lleva operando tu negocio. Empezar tarde tiene un costo que no se ve.", tags:["agentes","estrategia","ventaja"], link:"blog/empezar-cuanto-antes.html" }
-  ];
-  initLibrary(GUIAS, '');
-</script>
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">IAgentics Labs</div>
+    <div class="footer-links">
+      <a href="servicio.html">Servicio</a>
+      <a href="https://wa.me/5491125545369" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
